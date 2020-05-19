@@ -23,6 +23,8 @@
 		7841B10F247471B100011D81 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7841B109247471B000011D81 /* Roboto-Italic.ttf */; };
 		7841B110247471B100011D81 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7841B10A247471B000011D81 /* Roboto-Light.ttf */; };
 		7841B111247471B100011D81 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7841B10B247471B000011D81 /* Roboto-Medium.ttf */; };
+		7841B1132474781600011D81 /* VitalsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B1122474781600011D81 /* VitalsLog.swift */; };
+		7841B1152474785B00011D81 /* Vitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B1142474785B00011D81 /* Vitals.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		7841B109247471B000011D81 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
 		7841B10A247471B000011D81 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		7841B10B247471B000011D81 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		7841B1122474781600011D81 /* VitalsLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsLog.swift; sourceTree = "<group>"; };
+		7841B1142474785B00011D81 /* Vitals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vitals.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +130,8 @@
 		7841B0F92474703300011D81 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				7841B1122474781600011D81 /* VitalsLog.swift */,
+				7841B1142474785B00011D81 /* Vitals.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -250,9 +256,11 @@
 				7841B0FF2474706400011D81 /* BaseViewController.swift in Sources */,
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
+				7841B1152474785B00011D81 /* Vitals.swift in Sources */,
 				7841B1002474706400011D81 /* BaseNavigationController.swift in Sources */,
 				7841B1042474707000011D81 /* UIKitExtensions.swift in Sources */,
 				7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */,
+				7841B1132474781600011D81 /* VitalsLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
