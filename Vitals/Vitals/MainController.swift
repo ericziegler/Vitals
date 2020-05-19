@@ -10,8 +10,15 @@ import UIKit
 
 class MainController: BaseViewController {
 
+    // MARK: - Init
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNavBar()
+    }
+
+    private func setupNavBar() {
+        self.title = "Vitals"
     }
 
 }

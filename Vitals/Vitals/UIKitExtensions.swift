@@ -7,13 +7,13 @@ import UIKit
 // MARK: Global Properties
 
 func applyApplicationAppearanceProperties() {
-    UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.applicationFontOfSize(17)], for: .normal)
+    UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font : UIFont.applicationMediumFontOfSize(21)], for: .normal)
     UINavigationBar.appearance().tintColor = UIColor.white
     UINavigationBar.appearance().barTintColor = UIColor.main
 }
 
 func navTitleTextAttributes() -> [NSAttributedString.Key : Any] {
-    return [NSAttributedString.Key.font : UIFont.applicationBoldFontOfSize(21.0), .foregroundColor : UIColor.navAccent]
+    return [NSAttributedString.Key.font : UIFont.applicationMediumFontOfSize(26), .foregroundColor : UIColor.white]
 }
 
 // MARK: - UIImage
@@ -117,6 +117,18 @@ class BoldLabel: ApplicationStyleLabel {
     }
 }
 
+class MediumLabel: ApplicationStyleLabel {
+    override func commonInit() {
+        self.font = UIFont.applicationMediumFontOfSize(self.font.pointSize)
+    }
+}
+
+class ThinLabel: ApplicationStyleLabel {
+    override func commonInit() {
+        self.font = UIFont.applicationThinFontOfSize(self.font.pointSize)
+    }
+}
+
 class LightLabel: ApplicationStyleLabel {
     override func commonInit() {
         self.font = UIFont.applicationLightFontOfSize(self.font.pointSize)
@@ -176,6 +188,21 @@ class BoldButton: ApplicationStyleButton {
     }
 }
 
+class MediumButton: ApplicationStyleButton {
+    override func commonInit() {
+        if let font = self.titleLabel?.font {
+            self.titleLabel?.font = UIFont.applicationMediumFontOfSize(font.pointSize)
+        }
+    }
+}
+class ThinButton: ApplicationStyleButton {
+    override func commonInit() {
+        if let font = self.titleLabel?.font {
+            self.titleLabel?.font = UIFont.applicationThinFontOfSize(font.pointSize)
+        }
+    }
+}
+
 class LightButton: ApplicationStyleButton {
     override func commonInit() {
         if let font = self.titleLabel?.font {
@@ -189,15 +216,23 @@ class LightButton: ApplicationStyleButton {
 extension UIFont {
 
     class func applicationFontOfSize(_ size: CGFloat) -> UIFont {
-        return UIFont(name: "HelveticaNeue", size: size)!
+        return UIFont(name: "Roboto-Regular", size: size)!
+    }
+
+    class func applicationMediumFontOfSize(_ size: CGFloat) -> UIFont {
+        return UIFont(name: "Roboto-Medium", size: size)!
     }
 
     class func applicationBoldFontOfSize(_ size: CGFloat) -> UIFont {
-        return UIFont(name: "HelveticaNeue-Bold", size: size)!
+        return UIFont(name: "Roboto-Bold", size: size)!
     }
 
     class func applicationLightFontOfSize(_ size: CGFloat) -> UIFont {
-        return UIFont(name: "HelveticaNeue-Light", size: size)!
+        return UIFont(name: "Roboto-Light", size: size)!
+    }
+
+    class func applicationThinFontOfSize(_ size: CGFloat) -> UIFont {
+        return UIFont(name: "Roboto-Thin", size: size)!
     }
 
     class func debugListFonts() {
@@ -266,23 +301,19 @@ extension UIColor {
     }
 
     class var main: UIColor {
-        return UIColor(hex: 0xc83637)
+        return UIColor(hex: 0x8a2be2)
     }
 
-    class var navAccent: UIColor {
-        return UIColor.white
+    class var appGray: UIColor {
+        return UIColor(hex: 0xe6eff6)
     }
 
-    class var accent: UIColor {
-        return UIColor(hex: 0x000000)
+    class var appLightGray: UIColor {
+        return UIColor(hex: 0xdedede)
     }
 
-    class var lightText: UIColor {
-        return UIColor(hex: 0xB1BDD8)
-    }
-
-    class var tableSectionColor: UIColor {
-        return UIColor(hex: 0x0C2F6F)
+    class var appDarkGray: UIColor {
+        return UIColor(hex: 0xbbbbbb)
     }
 
 }
