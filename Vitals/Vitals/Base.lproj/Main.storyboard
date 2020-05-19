@@ -30,10 +30,29 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="p7k-gQ-oeI">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="d42-XV-Oja"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="kqo-SD-kHQ"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="p7k-gQ-oeI" secondAttribute="trailing" id="Opi-c2-2GA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="p7k-gQ-oeI" secondAttribute="bottom" id="UbC-9b-MLT"/>
+                            <constraint firstItem="p7k-gQ-oeI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="VP0-Pt-N1h"/>
+                            <constraint firstItem="p7k-gQ-oeI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="iHI-b5-sei"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ub5-sF-QYz"/>
+                    <connections>
+                        <outlet property="vitalsTable" destination="p7k-gQ-oeI" id="vBa-oQ-2Jn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
