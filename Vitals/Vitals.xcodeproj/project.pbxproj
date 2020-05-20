@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0D247571E8006F6C42 /* VitalsController.swift */; };
 		7841B0E22474700700011D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E12474700700011D81 /* AppDelegate.swift */; };
 		7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E32474700700011D81 /* SceneDelegate.swift */; };
 		7841B0E62474700700011D81 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* ListController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		78162F0D247571E8006F6C42 /* VitalsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsController.swift; sourceTree = "<group>"; };
 		7841B0DE2474700700011D81 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7841B0E12474700700011D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7841B0E32474700700011D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -84,8 +86,6 @@
 			children = (
 				7841B0FB2474703E00011D81 /* AppDelegate */,
 				7841B0FA2474703700011D81 /* ViewControllers */,
-				7841B0E72474700700011D81 /* Main.storyboard */,
-				7841B0E52474700700011D81 /* ListController.swift */,
 				7841B0F92474703300011D81 /* Data */,
 				7841B0F82474702C00011D81 /* Views */,
 				7841B0F62474701D00011D81 /* Extensions */,
@@ -143,6 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				7841B0FC2474704E00011D81 /* BaseControllers */,
+				7841B0E72474700700011D81 /* Main.storyboard */,
+				7841B0E52474700700011D81 /* ListController.swift */,
+				78162F0D247571E8006F6C42 /* VitalsController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				7841B11724747FB000011D81 /* VitalsCell.swift in Sources */,
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
+				78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */,
 				7841B1152474785B00011D81 /* Vitals.swift in Sources */,
 				7841B1002474706400011D81 /* BaseNavigationController.swift in Sources */,
 				7841B1042474707000011D81 /* UIKitExtensions.swift in Sources */,

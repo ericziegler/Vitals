@@ -24,6 +24,28 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     private func setupNavBar() {
         self.title = "Vitals"
+        if let addImage = UIImage(named: "Add") {
+            let addButton = UIButton(type: .custom)
+            addButton.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
+            addButton.setImage(addImage, for: .normal)
+            addButton.frame = CGRect(x: 0, y: 0, width: addImage.size.width, height: addImage.size.height)
+            let addItem = UIBarButtonItem(customView: addButton)
+            self.navigationItem.rightBarButtonItem = addItem
+        }
+    }
+
+    // MARK: - Actions
+
+    @IBAction func addTapped(_ sender: AnyObject) {
+        showVitalsControllerFor(vitals: nil)
+    }
+
+    // MARK: - Helpers
+
+    private func showVitalsControllerFor(vitals: Vitals?) {
+        let controller = VitalsController.createControllerFor(vitals: vitals)
+        let navController = BaseNavigationController(rootViewController: controller)
+        self.present(navController, animated: true, completion: nil)
     }
 
     // MARK: - UITableViewDataSource / UITableViewDelegate
@@ -44,7 +66,8 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        let vitals = VitalsLog.shared.vitalsAt(index: indexPath.row)
+        showVitalsControllerFor(vitals: vitals)
     }
 
 }

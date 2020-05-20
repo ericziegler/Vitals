@@ -47,7 +47,7 @@ class VitalsCell: UITableViewCell {
             if let date = vitals.date {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "M/d/yy - a"
-                dateLabel.text = formatter.string(from: date).uppercased()
+                dateLabel.text = "\(formatter.string(from: date).uppercased()) Vitals"
             }
             if let weight = vitals.weight {
                 weightLabel.text = "\(weight) lbs."
