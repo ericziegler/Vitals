@@ -44,10 +44,16 @@ class VitalsCell: UITableViewCell {
 
     func layoutFor(vitals: Vitals?) {
         if let vitals = vitals {
+            // TODO: Update to handle AM/PM
             if let date = vitals.date {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "M/d/yy - a"
-                dateLabel.text = "\(formatter.string(from: date).uppercased()) Vitals"
+                if date.dateAtBeginningOfDay() == Date().dateAtBeginningOfDay() {
+                    formatter.dateFormat = "a"
+                    dateLabel.text = "Today's \(formatter.string(from: date).uppercased()) Vitals"
+                } else {
+                    dateLabel.text = "\(formatter.string(from: date).uppercased()) Vitals"
+                }
             }
             if let weight = vitals.weight {
                 weightLabel.text = "\(weight) lbs."

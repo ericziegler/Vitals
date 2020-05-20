@@ -16,6 +16,15 @@ class VitalsController: BaseViewController {
 
     // MARK: - Properties
 
+    @IBOutlet var amPmSegmentedControl: UISegmentedControl!
+    @IBOutlet var dateLabel: LightLabel!
+    @IBOutlet var weightField: UITextField!
+    @IBOutlet var temperatureField: UITextField!
+    @IBOutlet var systolicField: UITextField!
+    @IBOutlet var diastolicField: UITextField!
+    @IBOutlet var heartRateField: UITextField!
+    @IBOutlet var saveButton: UIButton!
+
     var initialVitals: Vitals?
     var editedVitals = Vitals()
 
@@ -32,6 +41,9 @@ class VitalsController: BaseViewController {
         super.viewDidLoad()
         createVitalsCopy()
         setupNavBar()
+        setupFields()
+        amPmSegmentedControl.ensureiOS12Style()
+        saveButton.layer.cornerRadius = 10
     }
 
     private func createVitalsCopy() {
@@ -66,6 +78,32 @@ class VitalsController: BaseViewController {
         }
     }
 
+    private func setupFields() {
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(doneTapped(_:)))
+        view.addGestureRecognizer(tapRecognizer)
+
+        let weightItem = weightField.addButtonOnKeyboardWithText(buttonText: "Next")
+        weightItem.target = self
+        weightItem.tag = 0
+        weightItem.action = #selector(nextTapped(_:))
+        let temperatureItem = temperatureField.addButtonOnKeyboardWithText(buttonText: "Next")
+        temperatureItem.target = self
+        temperatureItem.tag = 1
+        temperatureItem.action = #selector(nextTapped(_:))
+        let systolicItem = systolicField.addButtonOnKeyboardWithText(buttonText: "Next")
+        systolicItem.target = self
+        systolicItem.tag = 2
+        systolicItem.action = #selector(nextTapped(_:))
+        let diastolicItem = diastolicField.addButtonOnKeyboardWithText(buttonText: "Next")
+        diastolicItem.target = self
+        diastolicItem.tag = 3
+        diastolicItem.action = #selector(nextTapped(_:))
+        let heartRateItem = heartRateField.addButtonOnKeyboardWithText(buttonText: "Done")
+        heartRateItem.target = self
+        heartRateItem.tag = 4
+        heartRateItem.action = #selector(doneTapped(_:))
+    }
+
     // MARK: - Actions
 
     @IBAction func closeTapped(_ sender: AnyObject) {
@@ -82,6 +120,11 @@ class VitalsController: BaseViewController {
         }
     }
 
+    @IBAction func dateTapped(_ sender: AnyObject) {
+        let controller = DatePickerController.createControllerFor(vitals: editedVitals)
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+
     @IBAction func saveTapped(_ sender: AnyObject) {
         let vitals = (initialVitals != nil) ? initialVitals! : Vitals()
         vitals.date = editedVitals.date
@@ -91,6 +134,25 @@ class VitalsController: BaseViewController {
         vitals.diastolic = editedVitals.diastolic
         vitals.pulse = editedVitals.pulse
         self.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func nextTapped(_ sender: AnyObject) {
+        if sender.tag == 0 {
+            temperatureField.becomeFirstResponder()
+        }
+        else if sender.tag == 1 {
+            systolicField.becomeFirstResponder()
+        }
+        else if sender.tag == 2 {
+            diastolicField.becomeFirstResponder()
+        }
+        else if sender.tag == 3 {
+            heartRateField.becomeFirstResponder()
+        }
+    }
+
+    @objc func doneTapped(_ sender: AnyObject) {
+        self.view.endEditing(true)
     }
 
     // MARK: - Helpers
@@ -116,6 +178,12 @@ class VitalsController: BaseViewController {
         } else {
             return false
         }
+    }
+
+    // MARK: - UITextFieldDelegate
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.selectAll(self)
     }
 
 }
