@@ -1,5 +1,5 @@
 //
-//  MainController.swift
+//  ListController.swift
 //  Vitals
 //
 //  Created by Eric Ziegler on 5/19/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ListController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
 
     // MARK: - Properties
 
@@ -18,6 +18,7 @@ class MainController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        vitalsTable.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 10, right: 0)
         setupNavBar()
     }
 
@@ -28,19 +29,22 @@ class MainController: BaseViewController, UITableViewDataSource, UITableViewDele
     // MARK: - UITableViewDataSource / UITableViewDelegate
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return VitalsLog.shared.vitalsCount
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: VitalsCellId, for: indexPath) as! VitalsCell
+        let vitals = VitalsLog.shared.vitalsAt(index: indexPath.row)
+        cell.layoutFor(vitals: vitals)
+        return cell
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 0
+        return VitalsCellHeight
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
     }
 
 }

@@ -301,19 +301,23 @@ extension UIColor {
     }
 
     class var main: UIColor {
-        return UIColor(hex: 0x8a2be2)
-    }
-
-    class var appGray: UIColor {
-        return UIColor(hex: 0xe6eff6)
+        return UIColor(hex: 0x7c40ff)
     }
 
     class var appLightGray: UIColor {
-        return UIColor(hex: 0xdedede)
+        return UIColor(hex: 0xc1c5cd)
+    }
+
+    class var appGray: UIColor {
+        return UIColor(hex: 0xa8adb9)
     }
 
     class var appDarkGray: UIColor {
-        return UIColor(hex: 0xbbbbbb)
+        return UIColor(hex: 0x68737d)
+    }
+
+    class var appDark: UIColor {
+        return UIColor(hex: 0x363d45)
     }
 
 }

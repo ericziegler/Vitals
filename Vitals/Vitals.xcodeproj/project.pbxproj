@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7841B0E22474700700011D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E12474700700011D81 /* AppDelegate.swift */; };
 		7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E32474700700011D81 /* SceneDelegate.swift */; };
-		7841B0E62474700700011D81 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* MainController.swift */; };
+		7841B0E62474700700011D81 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* ListController.swift */; };
 		7841B0E92474700700011D81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7841B0E72474700700011D81 /* Main.storyboard */; };
 		7841B0EB2474700800011D81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7841B0EA2474700800011D81 /* Assets.xcassets */; };
 		7841B0EE2474700800011D81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7841B0EC2474700800011D81 /* LaunchScreen.storyboard */; };
@@ -25,13 +25,14 @@
 		7841B111247471B100011D81 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7841B10B247471B000011D81 /* Roboto-Medium.ttf */; };
 		7841B1132474781600011D81 /* VitalsLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B1122474781600011D81 /* VitalsLog.swift */; };
 		7841B1152474785B00011D81 /* Vitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B1142474785B00011D81 /* Vitals.swift */; };
+		7841B11724747FB000011D81 /* VitalsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B11624747FB000011D81 /* VitalsCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		7841B0DE2474700700011D81 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7841B0E12474700700011D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7841B0E32474700700011D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7841B0E52474700700011D81 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		7841B0E52474700700011D81 /* ListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListController.swift; sourceTree = "<group>"; };
 		7841B0E82474700700011D81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7841B0EA2474700800011D81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7841B0ED2474700800011D81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -48,6 +49,7 @@
 		7841B10B247471B000011D81 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		7841B1122474781600011D81 /* VitalsLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsLog.swift; sourceTree = "<group>"; };
 		7841B1142474785B00011D81 /* Vitals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vitals.swift; sourceTree = "<group>"; };
+		7841B11624747FB000011D81 /* VitalsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,7 +85,7 @@
 				7841B0FB2474703E00011D81 /* AppDelegate */,
 				7841B0FA2474703700011D81 /* ViewControllers */,
 				7841B0E72474700700011D81 /* Main.storyboard */,
-				7841B0E52474700700011D81 /* MainController.swift */,
+				7841B0E52474700700011D81 /* ListController.swift */,
 				7841B0F92474703300011D81 /* Data */,
 				7841B0F82474702C00011D81 /* Views */,
 				7841B0F62474701D00011D81 /* Extensions */,
@@ -123,6 +125,7 @@
 		7841B0F82474702C00011D81 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7841B11624747FB000011D81 /* VitalsCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -252,8 +255,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7841B0E62474700700011D81 /* MainController.swift in Sources */,
+				7841B0E62474700700011D81 /* ListController.swift in Sources */,
 				7841B0FF2474706400011D81 /* BaseViewController.swift in Sources */,
+				7841B11724747FB000011D81 /* VitalsCell.swift in Sources */,
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
 				7841B1152474785B00011D81 /* Vitals.swift in Sources */,
