@@ -10,6 +10,8 @@
 		78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0D247571E8006F6C42 /* VitalsController.swift */; };
 		78162F102475D147006F6C42 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0F2475D147006F6C42 /* DatePickerController.swift */; };
 		78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = 78162F112476E1F9006F6C42 /* vitalsdata.csv */; };
+		78162F142476FD87006F6C42 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F132476FD87006F6C42 /* LineChart.swift */; };
+		78162F162476FDE0006F6C42 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F152476FDE0006F6C42 /* GraphController.swift */; };
 		7841B0E22474700700011D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E12474700700011D81 /* AppDelegate.swift */; };
 		7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E32474700700011D81 /* SceneDelegate.swift */; };
 		7841B0E62474700700011D81 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* ListController.swift */; };
@@ -35,6 +37,8 @@
 		78162F0D247571E8006F6C42 /* VitalsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsController.swift; sourceTree = "<group>"; };
 		78162F0F2475D147006F6C42 /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		78162F112476E1F9006F6C42 /* vitalsdata.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = vitalsdata.csv; sourceTree = "<group>"; };
+		78162F132476FD87006F6C42 /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
+		78162F152476FDE0006F6C42 /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		7841B0DE2474700700011D81 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7841B0E12474700700011D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7841B0E32474700700011D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		7841B0F72474702600011D81 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				78162F132476FD87006F6C42 /* LineChart.swift */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -152,6 +157,7 @@
 				7841B0E52474700700011D81 /* ListController.swift */,
 				78162F0D247571E8006F6C42 /* VitalsController.swift */,
 				78162F0F2475D147006F6C42 /* DatePickerController.swift */,
+				78162F152476FDE0006F6C42 /* GraphController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -270,12 +276,14 @@
 				7841B11724747FB000011D81 /* VitalsCell.swift in Sources */,
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
+				78162F142476FD87006F6C42 /* LineChart.swift in Sources */,
 				78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */,
 				7841B1152474785B00011D81 /* Vitals.swift in Sources */,
 				7841B1002474706400011D81 /* BaseNavigationController.swift in Sources */,
 				7841B1042474707000011D81 /* UIKitExtensions.swift in Sources */,
 				78162F102475D147006F6C42 /* DatePickerController.swift in Sources */,
 				7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */,
+				78162F162476FDE0006F6C42 /* GraphController.swift in Sources */,
 				7841B1132474781600011D81 /* VitalsLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

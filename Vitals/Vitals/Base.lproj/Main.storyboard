@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZhZ-xq-dIP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qd8-mB-fZX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
@@ -560,9 +560,193 @@
             </objects>
             <point key="canvasLocation" x="1525" y="109"/>
         </scene>
+        <!--Base Navigation Controller-->
+        <scene sceneID="wbV-RZ-NXN">
+            <objects>
+                <navigationController id="qd8-mB-fZX" customClass="BaseNavigationController" customModule="Vitals" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="8VL-Bw-vFK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="XYH-3A-wGr" kind="relationship" relationship="rootViewController" id="Uvy-6O-hq2"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GWe-eA-lVC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-626" y="826"/>
+        </scene>
+        <!--Graph Controller-->
+        <scene sceneID="J1g-aU-0Xw">
+            <objects>
+                <viewController storyboardIdentifier="GraphControllerId" id="XYH-3A-wGr" customClass="GraphController" customModule="Vitals" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rza-MG-evb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hiw-iH-3tR" userLabel="Vital View">
+                                <rect key="frame" x="126.5" y="105" width="161" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Blood Pressure" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.94999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="xJc-9G-7Ok" customClass="MediumLabel" customModule="Vitals" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="0.0" width="122" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="6Gr-bu-pb2"/>
+                                            <constraint firstAttribute="width" constant="122" id="xE6-O7-MdN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                        <color key="textColor" red="0.48627450979999998" green="0.25098039220000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="c8c-t3-vuy">
+                                        <rect key="frame" x="138" y="9.5" width="15" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="S72-Vr-RYW"/>
+                                            <constraint firstAttribute="height" constant="11" id="XHB-ro-7d9"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7BF-jM-KbJ" userLabel="Vital Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="161" height="30"/>
+                                        <connections>
+                                            <action selector="vitalTapped:" destination="XYH-3A-wGr" eventType="touchUpInside" id="I0m-so-on2"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="c8c-t3-vuy" secondAttribute="trailing" constant="8" id="F2z-sG-ZQt"/>
+                                    <constraint firstAttribute="trailing" secondItem="7BF-jM-KbJ" secondAttribute="trailing" id="Glu-U4-7i8"/>
+                                    <constraint firstItem="c8c-t3-vuy" firstAttribute="leading" secondItem="xJc-9G-7Ok" secondAttribute="trailing" constant="8" id="N2Z-Wj-kP3"/>
+                                    <constraint firstItem="7BF-jM-KbJ" firstAttribute="top" secondItem="Hiw-iH-3tR" secondAttribute="top" id="Rjh-6e-iBj"/>
+                                    <constraint firstItem="xJc-9G-7Ok" firstAttribute="leading" secondItem="Hiw-iH-3tR" secondAttribute="leading" constant="8" id="US1-eD-heZ"/>
+                                    <constraint firstAttribute="height" constant="30" id="VN7-cs-IfY"/>
+                                    <constraint firstItem="7BF-jM-KbJ" firstAttribute="leading" secondItem="Hiw-iH-3tR" secondAttribute="leading" id="ZAT-3f-2li"/>
+                                    <constraint firstItem="c8c-t3-vuy" firstAttribute="centerY" secondItem="xJc-9G-7Ok" secondAttribute="centerY" id="alt-cG-CWA"/>
+                                    <constraint firstAttribute="bottom" secondItem="xJc-9G-7Ok" secondAttribute="bottom" id="oSe-VR-m9u"/>
+                                    <constraint firstItem="xJc-9G-7Ok" firstAttribute="top" secondItem="Hiw-iH-3tR" secondAttribute="top" id="vrQ-36-6fI"/>
+                                    <constraint firstAttribute="bottom" secondItem="7BF-jM-KbJ" secondAttribute="bottom" id="yBH-Mu-bov"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qvA-Hg-8ii" userLabel="Time Period View">
+                                <rect key="frame" x="241" y="158" width="161" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Last 2 Weeks" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRp-ia-iVf" customClass="MediumLabel" customModule="Vitals" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="0.0" width="122" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="122" id="ihc-gn-Vtj"/>
+                                            <constraint firstAttribute="height" constant="30" id="qhZ-Rw-o1y"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                        <color key="textColor" red="0.48627450979999998" green="0.25098039220000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="m4U-de-VJK">
+                                        <rect key="frame" x="138" y="9.5" width="15" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="BER-9b-GtV"/>
+                                            <constraint firstAttribute="height" constant="11" id="GUu-Nk-IcJ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cFO-Fr-wHw" userLabel="Time Period Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="161" height="30"/>
+                                        <connections>
+                                            <action selector="timePeriodTapped:" destination="XYH-3A-wGr" eventType="touchUpInside" id="Rh9-Oy-Xxz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="m4U-de-VJK" secondAttribute="trailing" constant="8" id="3BN-VC-vJk"/>
+                                    <constraint firstItem="BRp-ia-iVf" firstAttribute="top" secondItem="qvA-Hg-8ii" secondAttribute="top" id="RRb-gj-7Ol"/>
+                                    <constraint firstItem="cFO-Fr-wHw" firstAttribute="top" secondItem="qvA-Hg-8ii" secondAttribute="top" id="Tb3-Wc-wzA"/>
+                                    <constraint firstItem="m4U-de-VJK" firstAttribute="centerY" secondItem="BRp-ia-iVf" secondAttribute="centerY" id="UL3-eD-DTG"/>
+                                    <constraint firstAttribute="trailing" secondItem="cFO-Fr-wHw" secondAttribute="trailing" id="UqT-wE-ZrW"/>
+                                    <constraint firstAttribute="bottom" secondItem="BRp-ia-iVf" secondAttribute="bottom" id="gyh-rh-gWw"/>
+                                    <constraint firstItem="m4U-de-VJK" firstAttribute="leading" secondItem="BRp-ia-iVf" secondAttribute="trailing" constant="8" id="ipd-oZ-YHq"/>
+                                    <constraint firstItem="BRp-ia-iVf" firstAttribute="leading" secondItem="qvA-Hg-8ii" secondAttribute="leading" constant="8" id="r9U-Fj-WU4"/>
+                                    <constraint firstAttribute="bottom" secondItem="cFO-Fr-wHw" secondAttribute="bottom" id="rRi-My-C7f"/>
+                                    <constraint firstItem="cFO-Fr-wHw" firstAttribute="leading" secondItem="qvA-Hg-8ii" secondAttribute="leading" id="vWP-RI-w0m"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4U-ZO-Svs" userLabel="AMPM View">
+                                <rect key="frame" x="12" y="158" width="161" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AM Only" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNi-qP-rVO" customClass="MediumLabel" customModule="Vitals" customModuleProvider="target">
+                                        <rect key="frame" x="8" y="0.0" width="122" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="3lg-J3-Caf"/>
+                                            <constraint firstAttribute="width" constant="122" id="CD0-o5-Uoh"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Roboto-Medium" family="Roboto" pointSize="18"/>
+                                        <color key="textColor" red="0.48627450979999998" green="0.25098039220000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Disclosure" translatesAutoresizingMaskIntoConstraints="NO" id="2Na-n7-8Ir">
+                                        <rect key="frame" x="138" y="9.5" width="15" height="11"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="15" id="d4N-5v-Mie"/>
+                                            <constraint firstAttribute="height" constant="11" id="s6J-Gp-Spe"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QlZ-EM-CLF" userLabel="AMPM Button">
+                                        <rect key="frame" x="0.0" y="0.0" width="161" height="30"/>
+                                        <connections>
+                                            <action selector="amPmTapped:" destination="XYH-3A-wGr" eventType="touchUpInside" id="7ZA-1l-S0E"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QlZ-EM-CLF" secondAttribute="bottom" id="09A-9M-XGe"/>
+                                    <constraint firstItem="QlZ-EM-CLF" firstAttribute="leading" secondItem="I4U-ZO-Svs" secondAttribute="leading" id="1jN-i4-jC6"/>
+                                    <constraint firstItem="2Na-n7-8Ir" firstAttribute="leading" secondItem="aNi-qP-rVO" secondAttribute="trailing" constant="8" id="92M-fV-0sP"/>
+                                    <constraint firstItem="aNi-qP-rVO" firstAttribute="top" secondItem="I4U-ZO-Svs" secondAttribute="top" id="AYk-Lc-QfD"/>
+                                    <constraint firstItem="2Na-n7-8Ir" firstAttribute="centerY" secondItem="aNi-qP-rVO" secondAttribute="centerY" id="G4A-UG-kMk"/>
+                                    <constraint firstAttribute="trailing" secondItem="QlZ-EM-CLF" secondAttribute="trailing" id="HZM-Ft-YQf"/>
+                                    <constraint firstAttribute="trailing" secondItem="2Na-n7-8Ir" secondAttribute="trailing" constant="8" id="Kby-TE-AET"/>
+                                    <constraint firstAttribute="bottom" secondItem="aNi-qP-rVO" secondAttribute="bottom" id="Lhs-GZ-Mdq"/>
+                                    <constraint firstItem="aNi-qP-rVO" firstAttribute="leading" secondItem="I4U-ZO-Svs" secondAttribute="leading" constant="8" id="UCS-9v-Jzq"/>
+                                    <constraint firstItem="QlZ-EM-CLF" firstAttribute="top" secondItem="I4U-ZO-Svs" secondAttribute="top" id="pdK-0G-L63"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xSp-vg-Jaa">
+                                <rect key="frame" x="10" y="208" width="394" height="634"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="I4U-ZO-Svs" firstAttribute="leading" secondItem="vdD-BF-avo" secondAttribute="leading" constant="12" id="557-SL-17d"/>
+                            <constraint firstItem="xSp-vg-Jaa" firstAttribute="leading" secondItem="vdD-BF-avo" secondAttribute="leading" constant="10" id="8eB-a4-q6E"/>
+                            <constraint firstItem="qvA-Hg-8ii" firstAttribute="top" secondItem="Hiw-iH-3tR" secondAttribute="bottom" constant="23" id="CSU-HI-ahF"/>
+                            <constraint firstItem="Hiw-iH-3tR" firstAttribute="centerX" secondItem="rza-MG-evb" secondAttribute="centerX" id="CX9-2m-2Bl"/>
+                            <constraint firstItem="vdD-BF-avo" firstAttribute="trailing" secondItem="qvA-Hg-8ii" secondAttribute="trailing" constant="12" id="NDQ-zT-1Dy"/>
+                            <constraint firstItem="I4U-ZO-Svs" firstAttribute="top" secondItem="Hiw-iH-3tR" secondAttribute="bottom" constant="23" id="NgB-3P-hZI"/>
+                            <constraint firstItem="Hiw-iH-3tR" firstAttribute="top" secondItem="vdD-BF-avo" secondAttribute="top" constant="17" id="Qzs-jH-8Eu"/>
+                            <constraint firstItem="vdD-BF-avo" firstAttribute="trailing" secondItem="xSp-vg-Jaa" secondAttribute="trailing" constant="10" id="blE-QF-aPe"/>
+                            <constraint firstItem="vdD-BF-avo" firstAttribute="bottom" secondItem="xSp-vg-Jaa" secondAttribute="bottom" constant="20" id="dWO-ml-XKM"/>
+                            <constraint firstItem="xSp-vg-Jaa" firstAttribute="top" secondItem="QlZ-EM-CLF" secondAttribute="bottom" constant="20" id="eUU-aY-fLU"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vdD-BF-avo"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="duQ-Zh-WFb"/>
+                    <connections>
+                        <outlet property="amPmLabel" destination="aNi-qP-rVO" id="3q7-Br-4wa"/>
+                        <outlet property="amPmView" destination="I4U-ZO-Svs" id="ZYv-4H-fzY"/>
+                        <outlet property="graphContainer" destination="xSp-vg-Jaa" id="2X8-m3-6CI"/>
+                        <outlet property="timePeriodLabel" destination="BRp-ia-iVf" id="7XU-4g-b2g"/>
+                        <outlet property="timePeriodView" destination="qvA-Hg-8ii" id="ynI-EL-iXn"/>
+                        <outlet property="vitalLabel" destination="xJc-9G-7Ok" id="IPK-qZ-h4v"/>
+                        <outlet property="vitalView" destination="Hiw-iH-3tR" id="Qr9-cH-aj6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CyO-cm-jRh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="138" y="826"/>
+        </scene>
     </scenes>
     <resources>
         <image name="BloodPressure" width="16" height="22"/>
+        <image name="Disclosure" width="33.5" height="22"/>
         <image name="HeartRate" width="22" height="22"/>
         <image name="Temperature" width="12" height="22"/>
         <image name="Weight" width="22" height="22"/>
