@@ -16,13 +16,14 @@ class DatePickerController: BaseViewController {
 
     // MARK: - Properties
 
+    @IBOutlet var amPmSegmentedControl: UISegmentedControl!
     @IBOutlet var datePicker: UIDatePicker!
 
-    var vitals: Vitals?
+    var vitals: Vitals!
 
     // MARK: - Init
 
-    static func createControllerFor(vitals: Vitals?) -> DatePickerController {
+    static func createControllerFor(vitals: Vitals) -> DatePickerController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: DatePickerControllerId) as! DatePickerController
         controller.vitals = vitals
@@ -32,17 +33,21 @@ class DatePickerController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = nil
-        if let date = vitals?.date {
-            datePicker.date = date
-        } else {
-            datePicker.date = Date()
-        }
+        datePicker.date = vitals.date
+        amPmSegmentedControl.selectedSegmentIndex = vitals.timeOfDay.rawValue
+        amPmSegmentedControl.ensureiOS12Style()
     }
 
     // MARK: - Actions
 
     @IBAction func dateChanged(_ sender: AnyObject) {
-        vitals?.date = datePicker.date
+        vitals.date = datePicker.date
+    }
+
+    @IBAction func amPmChanged(_ sender: AnyObject) {
+        if let timeOfDay = TimeOfDay(rawValue: amPmSegmentedControl.selectedSegmentIndex) {
+            vitals.timeOfDay = timeOfDay
+        }
     }
 
 }

@@ -35,6 +35,7 @@ class VitalsLog {
             do {
                 if let cachedVitals = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Vitals] {
                     allVitals = cachedVitals
+                    sortVitals()
                 }
             } catch {
                 print("Failed to load vitals from user defaults.")
@@ -56,15 +57,17 @@ class VitalsLog {
 
     func add(vitals: Vitals) {
         allVitals.append(vitals)
+        sortVitals()
         save()
     }
 
     func removeAt(index: Int) {
         allVitals.remove(at: index)
+        sortVitals()
         save()
     }
 
-    // MARK: - Accessors
+    // MARK: - Helpers
 
     func vitalsAt(index: Int) -> Vitals? {
         if index > -1 && index < allVitals.count {
@@ -72,6 +75,10 @@ class VitalsLog {
         } else {
             return nil
         }
+    }
+
+    private func sortVitals() {
+        allVitals = allVitals.sorted(by: { $0.date!.timeIntervalSince1970 > $1.date!.timeIntervalSince1970 })
     }
 
 }

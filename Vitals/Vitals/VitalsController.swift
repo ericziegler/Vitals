@@ -15,8 +15,7 @@ let VitalsControllerId = "VitalsControllerId"
 class VitalsController: BaseViewController {
 
     // MARK: - Properties
-
-    @IBOutlet var amPmSegmentedControl: UISegmentedControl!
+    
     @IBOutlet var dateLabel: LightLabel!
     @IBOutlet var weightField: UITextField!
     @IBOutlet var temperatureField: UITextField!
@@ -40,24 +39,31 @@ class VitalsController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createVitalsCopy()
+        updateFieldValues()
         setupNavBar()
-        setupFields()
-        amPmSegmentedControl.ensureiOS12Style()
+        setupFields()        
         saveButton.layer.cornerRadius = 10
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateFieldValues()
     }
 
     private func createVitalsCopy() {
         editedVitals = Vitals()
-        editedVitals.date = initialVitals?.date
-        editedVitals.weight = initialVitals?.weight
-        editedVitals.temperature = initialVitals?.temperature
-        editedVitals.systolic = initialVitals?.systolic
-        editedVitals.diastolic = initialVitals?.diastolic
-        editedVitals.pulse = initialVitals?.pulse
+        if let vitals = initialVitals {
+            editedVitals.timeOfDay = vitals.timeOfDay
+            editedVitals.date = vitals.date
+            editedVitals.weight = vitals.weight
+            editedVitals.temperature = vitals.temperature
+            editedVitals.systolic = vitals.systolic
+            editedVitals.diastolic = vitals.diastolic
+            editedVitals.pulse = vitals.pulse
+        }
     }
 
     private func setupNavBar() {
-        updateNavTitle()
         if let closeImage = UIImage(named: "Close") {
             let closeButton = UIButton(type: .custom)
             closeButton.addTarget(self, action: #selector(closeTapped(_:)), for: .touchUpInside)
@@ -65,16 +71,6 @@ class VitalsController: BaseViewController {
             closeButton.frame = CGRect(x: 0, y: 0, width: closeImage.size.width, height: closeImage.size.height)
             let closeItem = UIBarButtonItem(customView: closeButton)
             self.navigationItem.rightBarButtonItem = closeItem
-        }
-    }
-
-    private func updateNavTitle() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "a"
-        if let date = editedVitals.date {
-            self.title = "\(formatter.string(from: date)) Vitals"
-        } else {
-            self.title = "New Vitals"
         }
     }
 
@@ -177,6 +173,40 @@ class VitalsController: BaseViewController {
             return true
         } else {
             return false
+        }
+    }
+
+    private func updateFieldValues() {
+        if let date = editedVitals.date, let timeOfDay = editedVitals.timeOfDay {
+            self.title = "\(timeOfDay.displayText) Vitals"
+            let formatter = DateFormatter()
+            formatter.dateFormat = "M/d/yy"
+            dateLabel.text = "\(formatter.string(from: date)) - \(timeOfDay.displayText)"
+        } else {
+            self.title = "New Vitals"
+            dateLabel.text = nil
+        }
+        if let weight = editedVitals.weight {
+            weightField.text = "\(weight)"
+        } else {
+            weightField.text = nil
+        }
+        if let temperature = editedVitals.temperature {
+            temperatureField.text = "\(temperature)"
+        } else {
+            temperatureField.text = nil
+        }
+        if let systolic = editedVitals.systolic, let diastolic = editedVitals.diastolic {
+            systolicField.text = "\(systolic)"
+            diastolicField.text = "\(diastolic)"
+        } else {
+            systolicField.text = nil
+            diastolicField.text = nil
+        }
+        if let pulse = editedVitals.pulse {
+            heartRateField.text = "\(pulse)"
+        } else {
+            heartRateField.text = nil
         }
     }
 

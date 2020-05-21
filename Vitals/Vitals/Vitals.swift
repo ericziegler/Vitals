@@ -10,6 +10,7 @@ import Foundation
 
 // MARK: - Constants
 
+let TimeOfDayCacheKey = "TimeOfDayCacheKey"
 let DateCacheKey = "DateCacheKey"
 let TemperatureCacheKey = "TemperatureCacheKey"
 let WeightCacheKey = "WeightCacheKey"
@@ -17,11 +18,27 @@ let SystolicCacheKey = "SystolicCacheKey"
 let DiastolicCacheKey = "DiastolicCacheKey"
 let PulseCacheKey = "PulseCacheKey"
 
+// MARK: - Enums
+
+enum TimeOfDay: Int {
+    case am
+    case pm
+
+    var displayText: String {
+        if self == .am {
+            return "AM"
+        } else {
+            return "PM"
+        }
+    }
+}
+
 class Vitals: NSObject, NSCoding {
 
     // MARK: - Properties
 
-    var date: Date?
+    var timeOfDay: TimeOfDay!
+    var date: Date!
     var temperature: Double?
     var weight: Int?
     var systolic: Int?
@@ -32,9 +49,21 @@ class Vitals: NSObject, NSCoding {
 
     override init() {
         super.init()
+        date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "a"
+        let dateString = formatter.string(from: date)
+        if dateString == "am" {
+            timeOfDay = .am
+        } else {
+            timeOfDay = .pm
+        }
     }
 
     required init?(coder decoder: NSCoder) {
+        if let cachedTimeOfDay = decoder.decodeObject(forKey: TimeOfDayCacheKey) as? NSNumber {
+            timeOfDay = TimeOfDay(rawValue: cachedTimeOfDay.intValue)
+        }
         if let cachedDate = decoder.decodeObject(forKey: DateCacheKey) as? Date {
             date = cachedDate
         }
@@ -56,6 +85,11 @@ class Vitals: NSObject, NSCoding {
     }
 
     func encode(with encoder: NSCoder) {
+        if let timeOfDayToCache = timeOfDay {
+            encoder.encode(NSNumber(integerLiteral: timeOfDayToCache.rawValue), forKey: TimeOfDayCacheKey)
+        } else {
+            encoder.encode(nil, forKey: TimeOfDayCacheKey)
+        }
         if let dateToCache = date {
             encoder.encode(dateToCache, forKey: DateCacheKey)
         } else {
