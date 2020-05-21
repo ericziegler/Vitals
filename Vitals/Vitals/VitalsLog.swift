@@ -43,6 +43,17 @@ class VitalsLog {
         }
     }
 
+    func loadFromFile() {
+        if let dataPath = Bundle.main.path(forResource: "vitalsdata", ofType: "csv") {
+            do {
+                let csv = try String(contentsOfFile: dataPath, encoding: .utf8)
+                parseCSV(csv)
+            } catch {
+                print("Error loading data")
+            }
+        }
+    }
+
     func save() {
         do {
             let data = try NSKeyedArchiver.archivedData(withRootObject: allVitals, requiringSecureCoding: false)
@@ -56,6 +67,11 @@ class VitalsLog {
     // MARK: - Add / Remove
 
     func add(vitals: Vitals) {
+        if vitals.timeOfDay == .am {
+            vitals.date = vitals.date.dateAtBeginningOfDay()
+        } else {
+            vitals.date = vitals.date.dateAtBeginningOfDay().dateByAddingHours(13)!
+        }
         allVitals.append(vitals)
         sortVitals()
         save()
@@ -79,6 +95,43 @@ class VitalsLog {
 
     func sortVitals() {
         allVitals = allVitals.sorted(by: { $0.date!.timeIntervalSince1970 > $1.date!.timeIntervalSince1970 })
+    }
+
+    private func parseCSV(_ csv: String) {
+        allVitals.removeAll()
+        let components = csv.components(separatedBy: "\n")
+        for curComponent in components {
+            if curComponent.count > 0 {
+                let vitals = Vitals()
+                let formatter = DateFormatter()
+                formatter.dateFormat = "M/d/yy"
+                let vitalsComponents = curComponent.components(separatedBy: " ")
+                vitals.date = formatter.date(from: vitalsComponents[0])
+                if vitalsComponents[1] == "0" {
+                    vitals.timeOfDay = .am
+                } else {
+                    vitals.timeOfDay = .pm
+                }
+                if vitalsComponents[2] != "0" {
+                    vitals.weight = Int(vitalsComponents[2])
+                }
+                if vitalsComponents[3] != "0" {
+                    vitals.systolic = Int(vitalsComponents[3])
+                }
+                if vitalsComponents[4] != "0" {
+                    vitals.diastolic = Int(vitalsComponents[4])
+                }
+                if vitalsComponents[5] != "0" {
+                    vitals.pulse = Int(vitalsComponents[5])
+                }
+                if vitalsComponents[6] != "0" {
+                    vitals.temperature = Double(vitalsComponents[6])
+                }
+                self.add(vitals: vitals)
+            }
+        }
+        self.sortVitals()
+        self.save()
     }
 
 }

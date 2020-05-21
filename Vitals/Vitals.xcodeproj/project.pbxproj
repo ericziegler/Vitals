@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0D247571E8006F6C42 /* VitalsController.swift */; };
 		78162F102475D147006F6C42 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0F2475D147006F6C42 /* DatePickerController.swift */; };
+		78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = 78162F112476E1F9006F6C42 /* vitalsdata.csv */; };
 		7841B0E22474700700011D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E12474700700011D81 /* AppDelegate.swift */; };
 		7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E32474700700011D81 /* SceneDelegate.swift */; };
 		7841B0E62474700700011D81 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* ListController.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		78162F0D247571E8006F6C42 /* VitalsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsController.swift; sourceTree = "<group>"; };
 		78162F0F2475D147006F6C42 /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
+		78162F112476E1F9006F6C42 /* vitalsdata.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = vitalsdata.csv; sourceTree = "<group>"; };
 		7841B0DE2474700700011D81 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7841B0E12474700700011D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7841B0E32474700700011D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 				7841B0EA2474700800011D81 /* Assets.xcassets */,
 				7841B0EC2474700800011D81 /* LaunchScreen.storyboard */,
 				7841B0EF2474700800011D81 /* Info.plist */,
+				78162F112476E1F9006F6C42 /* vitalsdata.csv */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				7841B0EB2474700800011D81 /* Assets.xcassets in Resources */,
 				7841B110247471B100011D81 /* Roboto-Light.ttf in Resources */,
 				7841B0E92474700700011D81 /* Main.storyboard in Resources */,
+				78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */,
 				7841B111247471B100011D81 /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

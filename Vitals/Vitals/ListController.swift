@@ -24,6 +24,8 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     private func setupNavBar() {
         self.title = "Vitals"
+        let loadButton = UIBarButtonItem(title: "Load", style: .plain, target: self, action: #selector(loadTapped(_:)))
+        self.navigationItem.leftBarButtonItem = loadButton
         if let addImage = UIImage(named: "Add") {
             let addButton = UIButton(type: .custom)
             addButton.addTarget(self, action: #selector(addTapped(_:)), for: .touchUpInside)
@@ -38,6 +40,11 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     @IBAction func addTapped(_ sender: AnyObject) {
         showVitalsControllerFor(vitals: nil)
+    }
+
+    @IBAction func loadTapped(_ sender: AnyObject) {
+        VitalsLog.shared.loadFromFile()
+        vitalsTable.reloadData()
     }
 
     // MARK: - Helpers
