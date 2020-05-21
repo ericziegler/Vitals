@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class ListController: BaseViewController, UITableViewDataSource, UITableViewDelegate, VitalsControllerDelegate {
 
     // MARK: - Properties
 
@@ -43,7 +43,7 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
     // MARK: - Helpers
 
     private func showVitalsControllerFor(vitals: Vitals?) {
-        let controller = VitalsController.createControllerFor(vitals: vitals)
+        let controller = VitalsController.createControllerFor(vitals: vitals, delegate: self)
         let navController = BaseNavigationController(rootViewController: controller)
         self.present(navController, animated: true, completion: nil)
     }
@@ -68,6 +68,12 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vitals = VitalsLog.shared.vitalsAt(index: indexPath.row)
         showVitalsControllerFor(vitals: vitals)
+    }
+
+    // MARK: - VitalsControllerDelegate
+
+    func vitalsUpdatedFor(controller: VitalsController) {
+        vitalsTable.reloadData()
     }
 
 }

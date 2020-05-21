@@ -77,7 +77,7 @@ class VitalsLog {
         }
     }
 
-    private func sortVitals() {
+    func sortVitals() {
         allVitals = allVitals.sorted(by: { $0.date!.timeIntervalSince1970 > $1.date!.timeIntervalSince1970 })
     }
 

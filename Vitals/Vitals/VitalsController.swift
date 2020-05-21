@@ -12,7 +12,13 @@ import UIKit
 
 let VitalsControllerId = "VitalsControllerId"
 
-class VitalsController: BaseViewController {
+// MARK: - Protocols
+
+protocol VitalsControllerDelegate {
+    func vitalsUpdatedFor(controller: VitalsController)
+}
+
+class VitalsController: BaseViewController, DatePickerControllerDelegate {
 
     // MARK: - Properties
     
@@ -25,41 +31,42 @@ class VitalsController: BaseViewController {
     @IBOutlet var saveButton: UIButton!
 
     var initialVitals: Vitals?
-    var editedVitals = Vitals()
+    var date: Date!
+    var timeOfDay: TimeOfDay!
+    var delegate: VitalsControllerDelegate?
 
     // MARK: - Init
 
-    static func createControllerFor(vitals: Vitals?) -> VitalsController {
+    static func createControllerFor(vitals: Vitals?, delegate: VitalsControllerDelegate?) -> VitalsController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let controller = storyboard.instantiateViewController(withIdentifier: VitalsControllerId) as! VitalsController
         controller.initialVitals = vitals
+        controller.delegate = delegate
         return controller
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        createVitalsCopy()
+        setupDateAndTime()
         updateFieldValues()
         setupNavBar()
         setupFields()        
         saveButton.layer.cornerRadius = 10
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        updateFieldValues()
-    }
-
-    private func createVitalsCopy() {
-        editedVitals = Vitals()
+    private func setupDateAndTime() {
         if let vitals = initialVitals {
-            editedVitals.timeOfDay = vitals.timeOfDay
-            editedVitals.date = vitals.date
-            editedVitals.weight = vitals.weight
-            editedVitals.temperature = vitals.temperature
-            editedVitals.systolic = vitals.systolic
-            editedVitals.diastolic = vitals.diastolic
-            editedVitals.pulse = vitals.pulse
+            date = vitals.date
+            timeOfDay = vitals.timeOfDay
+        } else {
+            date = Date()
+            let formatter = DateFormatter()
+            formatter.dateFormat = "a"
+            if formatter.string(from: date) == "AM" {
+                timeOfDay = .am
+            } else {
+                timeOfDay = .pm
+            }
         }
     }
 
@@ -77,7 +84,6 @@ class VitalsController: BaseViewController {
     private func setupFields() {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(doneTapped(_:)))
         view.addGestureRecognizer(tapRecognizer)
-
         let weightItem = weightField.addButtonOnKeyboardWithText(buttonText: "Next")
         weightItem.target = self
         weightItem.tag = 0
@@ -103,32 +109,16 @@ class VitalsController: BaseViewController {
     // MARK: - Actions
 
     @IBAction func closeTapped(_ sender: AnyObject) {
-        if checkVitalsChanged() == false {
-            self.dismiss(animated: true, completion: nil)
-        } else {
-            let alert = UIAlertController(title: "Unsaved Changes", message: "Are you sure you would like to exit without saving changes?", preferredStyle: .alert)
-            let exitAction = UIAlertAction(title: "Exit", style: .default) { [unowned self] (action) in
-                self.dismiss(animated: true, completion: nil)
-            }
-            alert.addAction(exitAction)
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
+        self.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func dateTapped(_ sender: AnyObject) {
-        let controller = DatePickerController.createControllerFor(vitals: editedVitals)
+        let controller = DatePickerController.createControllerFor(date: date, timeOfDay: timeOfDay, delegate: self)
         self.navigationController?.pushViewController(controller, animated: true)
     }
 
     @IBAction func saveTapped(_ sender: AnyObject) {
-        let vitals = (initialVitals != nil) ? initialVitals! : Vitals()
-        vitals.date = editedVitals.date
-        vitals.weight = editedVitals.weight
-        vitals.temperature = editedVitals.temperature
-        vitals.systolic = editedVitals.systolic
-        vitals.diastolic = editedVitals.diastolic
-        vitals.pulse = editedVitals.pulse
+        saveVitals()
         self.dismiss(animated: true, completion: nil)
     }
 
@@ -153,67 +143,88 @@ class VitalsController: BaseViewController {
 
     // MARK: - Helpers
 
-    private func checkVitalsChanged() -> Bool {
-        if editedVitals.date != initialVitals?.date {
-            return true
-        }
-        else if editedVitals.weight != initialVitals?.weight {
-            return true
-        }
-        else if editedVitals.temperature != initialVitals?.temperature {
-            return true
-        }
-        else if editedVitals.systolic != initialVitals?.systolic {
-            return true
-        }
-        else if editedVitals.diastolic != initialVitals?.diastolic {
-            return true
-        }
-        else if editedVitals.pulse != initialVitals?.pulse {
-            return true
-        } else {
-            return false
-        }
-    }
-
     private func updateFieldValues() {
-        if let date = editedVitals.date, let timeOfDay = editedVitals.timeOfDay {
-            self.title = "\(timeOfDay.displayText) Vitals"
-            let formatter = DateFormatter()
-            formatter.dateFormat = "M/d/yy"
-            dateLabel.text = "\(formatter.string(from: date)) - \(timeOfDay.displayText)"
-        } else {
-            self.title = "New Vitals"
-            dateLabel.text = nil
-        }
-        if let weight = editedVitals.weight {
+        self.title = "\(timeOfDay.displayText) Vitals"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d/yy"
+        dateLabel.text = "\(formatter.string(from: date)) - \(timeOfDay.displayText)"
+
+        if let weight = initialVitals?.weight {
             weightField.text = "\(weight)"
         } else {
             weightField.text = nil
         }
-        if let temperature = editedVitals.temperature {
+        if let temperature = initialVitals?.temperature {
             temperatureField.text = "\(temperature)"
         } else {
             temperatureField.text = nil
         }
-        if let systolic = editedVitals.systolic, let diastolic = editedVitals.diastolic {
+        if let systolic = initialVitals?.systolic, let diastolic = initialVitals?.diastolic {
             systolicField.text = "\(systolic)"
             diastolicField.text = "\(diastolic)"
         } else {
             systolicField.text = nil
             diastolicField.text = nil
         }
-        if let pulse = editedVitals.pulse {
+        if let pulse = initialVitals?.pulse {
             heartRateField.text = "\(pulse)"
         } else {
             heartRateField.text = nil
         }
     }
 
+    private func saveVitals() {
+        let vitals = initialVitals ?? Vitals()
+        // update time and date
+        if let dateTimeComponents = dateLabel.text?.components(separatedBy: " - ") {
+            if let dateComponent = dateTimeComponents.first {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "M/d/yy"
+                vitals.date = formatter.date(from: dateComponent) ?? Date()
+            }
+            if let timeComponent = dateTimeComponents.last {
+                if timeComponent == "AM" {
+                    vitals.timeOfDay = .am
+                } else {
+                    vitals.timeOfDay = .pm
+                }
+            }
+        }
+        if let weightText = weightField.text, let weight = Int(weightText) {
+            vitals.weight = weight
+        }
+        if let temperatureText = temperatureField.text, let temperature = Double(temperatureText) {
+            vitals.temperature = temperature
+        }
+        if let systolicText = systolicField.text, let systolic = Int(systolicText) {
+            vitals.systolic = systolic
+        }
+        if let diastolicText = diastolicField.text, let diastolic = Int(diastolicText) {
+            vitals.diastolic = diastolic
+        }
+        if let pulseText = heartRateField.text, let pulse = Int(pulseText) {
+            vitals.pulse = pulse
+        }
+        if initialVitals == nil {
+            VitalsLog.shared.add(vitals: vitals)
+        }
+        VitalsLog.shared.sortVitals()
+        VitalsLog.shared.save()
+        delegate?.vitalsUpdatedFor(controller: self)
+    }
+
     // MARK: - UITextFieldDelegate
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         textField.selectAll(self)
+    }
+
+    // MARK: - DatePickerControllerDelegate
+
+    func dateAndTimeUpdatedFor(controller: DatePickerController, date: Date, timeOfDay: TimeOfDay) {
+        self.date = date
+        self.timeOfDay = timeOfDay
+        updateFieldValues()
     }
 
 }

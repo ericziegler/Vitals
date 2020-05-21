@@ -53,7 +53,7 @@ class Vitals: NSObject, NSCoding {
         let formatter = DateFormatter()
         formatter.dateFormat = "a"
         let dateString = formatter.string(from: date)
-        if dateString == "am" {
+        if dateString == "AM" {
             timeOfDay = .am
         } else {
             timeOfDay = .pm
