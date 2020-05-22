@@ -68,7 +68,7 @@ enum TimeOfDayFilter {
     }
 }
 
-class GraphController: BaseViewController, LineChartDelegate {
+class GraphController: BaseViewController {
 
     // MARK: - Properties
 
@@ -81,9 +81,10 @@ class GraphController: BaseViewController, LineChartDelegate {
     @IBOutlet var amPmLabel: MediumLabel!
 
     var graph = LineChart()
-    var type = VitalType.weight
+    var type = VitalType.temperature
     var period = TimePeriod.lastWeek
-    var timeOfDay = TimeOfDayFilter.amPm
+    var timeOfDay = TimeOfDayFilter.amOnly
+    var maxDataCount = 0
 
     // MARK: - Init
 
@@ -96,7 +97,7 @@ class GraphController: BaseViewController, LineChartDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "History"
-        setupGraph()
+        reloadGraph()
         styleUI()
     }
 
@@ -107,34 +108,125 @@ class GraphController: BaseViewController, LineChartDelegate {
         timePeriodView.layer.borderWidth = vitalView.layer.borderWidth
         amPmView.layer.borderColor = vitalView.layer.borderColor
         amPmView.layer.borderWidth = vitalView.layer.borderWidth
-        graphContainer.layer.borderColor = vitalView.layer.borderColor
-        graphContainer.layer.borderWidth = vitalView.layer.borderWidth
-    }
 
-    private func setupGraph() {
-        // simple arrays
-        let data: [CGFloat] = [3, 4, -2, 11, 13, 15]
-        let data2: [CGFloat] = [1, 3, 5, 13, 17, 20]
-
-        // simple line with custom x axis labels
-        let xLabels: [String] = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"]
-
-        graph = LineChart()
-        graph.animation.enabled = true
-        graph.area = true
-        graph.x.labels.visible = true
-        graph.x.grid.count = 5
-        graph.y.grid.count = 5
-        graph.x.labels.values = xLabels
-        graph.y.labels.visible = true
-        graph.addLine(data)
-        graph.addLine(data2)
-        graph.fillInParentView(parentView: graphContainer)
-        graph.delegate = self
+        vitalLabel.text = type.displayText
+        timePeriodLabel.text = period.displayText
+        amPmLabel.text = timeOfDay.displayText
     }
 
     private func reloadGraph() {
+        graph.removeFromSuperview()
+        graph = LineChart()
 
+        let vitalData = calculateVitals()
+        maxDataCount = 0
+        for curData in vitalData {
+            if curData.count > maxDataCount {
+                maxDataCount = curData.count
+            }
+        }
+        if type == .temperature {
+            graph.overrideMaximumYValue = 105
+            graph.overrideMinimumYValue = 90
+        }
+        else if type == .heartRate {
+            graph.overrideMaximumYValue = 115
+            graph.overrideMinimumYValue = 45
+        }
+        else if type == .weight {
+            graph.overrideMaximumYValue = 250
+            graph.overrideMinimumYValue = 150
+        }
+        else if type == .bloodPressure {
+            graph.overrideMaximumYValue = 175
+            graph.overrideMinimumYValue = 65
+        }
+
+        let xLabels: [String] = calculateTime()
+
+        graph.animation.enabled = true
+        graph.area = false
+        graph.x.labels.visible = true
+        graph.x.grid.count = CGFloat(xLabels.count)
+        graph.y.grid.count = CGFloat(maxDataCount)
+        graph.x.labels.values = xLabels
+        graph.y.labels.visible = true
+        for curData in vitalData {
+            graph.addLine(curData)
+        }
+        graph.fillInParentView(parentView: graphContainer)
+    }
+
+    private func calculateVitals() -> [[CGFloat]] {
+        var result = [[CGFloat]]()
+        var timePeriod = -7
+        if period == .lastTwoWeeks {
+            timePeriod = -14
+        }
+        else if period == .lastMonth {
+            timePeriod = -28
+        }
+        var data1 = [CGFloat]()
+        var data2 = [CGFloat]()
+        for i in 0 ..< VitalsLog.shared.vitalsCount {
+            if let vitals = VitalsLog.shared.vitalsAt(index: i) {
+                if vitals.date.isBetweenDates(Date().dateByAddingDays(timePeriod)!, endDate: Date()) {
+                    var canAdd = true
+                    if (timeOfDay == .amOnly && vitals.timeOfDay == .pm) || (timeOfDay == .pmOnly && vitals.timeOfDay == .am) {
+                        canAdd = false
+                    }
+                    if canAdd == true {
+                        if type == .temperature {
+                            data1.insert(CGFloat(vitals.temperature ?? 0), at: 0)
+                        }
+                        else if  type == .weight {
+                            data1.insert(CGFloat(vitals.weight ?? 0), at: 0)
+                        }
+                        else if type == .heartRate {
+                            data1.insert(CGFloat(vitals.pulse ?? 0), at: 0)
+                        }
+                        else if type == .bloodPressure {
+                            data1.insert(CGFloat(vitals.systolic ?? 0), at: 0)
+                            data2.insert(CGFloat(vitals.diastolic ?? 0), at: 0)
+                        }
+                    }
+                }
+            }
+        }
+        result.append(data1)
+        if type == .bloodPressure {
+            result.append(data2)
+        }
+        return result
+    }
+
+    private func calculateTime() -> [String] {
+        var result = [String]()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d"
+        var i = 0
+        if period == .lastWeek {
+            while i > -7 {
+                result.insert(formatter.string(from: Date().dateByAddingDays(i)!), at: 0)
+                i -= 1
+            }
+        }
+        else if period == .lastTwoWeeks {
+            while i > -14 {
+                result.insert(formatter.string(from: Date().dateByAddingDays(i)!), at: 0)
+                result.append("")
+                i -= 2
+            }
+        } else {
+            while i > -28 {
+                result.insert(formatter.string(from: Date().dateByAddingDays(i)!), at: 0)
+                result.append("")
+                result.append("")
+                result.append("")
+                i -= 4
+            }
+        }
+        return result
     }
 
     // MARK: - Actions
@@ -194,9 +286,10 @@ class GraphController: BaseViewController, LineChartDelegate {
     @IBAction func amPmTapped(_ sender: AnyObject) {
         let alert = UIAlertController(title: "Choose a Time of Day", message: nil, preferredStyle: .actionSheet)
         let amPmAction = UIAlertAction(title: "AM & PM", style: .default) { [unowned self] (action) in
-            self.timeOfDay = .amPm
-            self.amPmLabel.text = self.timeOfDay.displayText
-            self.reloadGraph()
+            // TODO: Implement
+//            self.timeOfDay = .amPm
+//            self.amPmLabel.text = self.timeOfDay.displayText
+//            self.reloadGraph()
         }
         alert.addAction(amPmAction)
         let amAction = UIAlertAction(title: "AM Only", style: .default) { [unowned self] (action) in
@@ -212,12 +305,6 @@ class GraphController: BaseViewController, LineChartDelegate {
         }
         alert.addAction(pmAction)
         self.present(alert, animated: true, completion: nil)
-    }
-
-    // MARK: - LineChartDelegate
-
-    func didSelectDataPoint(_ x: CGFloat, yValues: [CGFloat]) {
-        print("\(x), \(yValues)")
     }
 
 }

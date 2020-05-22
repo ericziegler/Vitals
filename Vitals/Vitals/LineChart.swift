@@ -93,6 +93,8 @@ open class LineChart: UIView {
     open var animation: Animation = Animation()
     open var dots: Dots = Dots()
     open var lineWidth: CGFloat = 2
+    open var overrideMinimumYValue: CGFloat?
+    open var overrideMaximumYValue: CGFloat?
     
     open var x: Coordinate = Coordinate()
     open var y: Coordinate = Coordinate()
@@ -101,8 +103,8 @@ open class LineChart: UIView {
     // values calculated on init
     fileprivate var drawingHeight: CGFloat = 0 {
         didSet {
-            let max = getMaximumValue()
-            let min = getMinimumValue()
+            let max = overrideMaximumYValue ?? getMaximumValue()
+            let min = overrideMinimumYValue ?? getMinimumValue()
             y.linear = LinearScale(domain: [min, max], range: [0, drawingHeight])
             y.scale = y.linear.scale()
             y.ticks = y.linear.ticks(Int(y.grid.count))
@@ -129,8 +131,8 @@ open class LineChart: UIView {
     
     // category10 colors from d3 - https://github.com/mbostock/d3/wiki/Ordinal-Scales
     open var colors: [UIColor] = [
-        UIColor(red: 0.121569, green: 0.466667, blue: 0.705882, alpha: 1),
         UIColor(red: 1, green: 0.498039, blue: 0.054902, alpha: 1),
+        UIColor(red: 0.121569, green: 0.466667, blue: 0.705882, alpha: 1),
         UIColor(red: 0.172549, green: 0.627451, blue: 0.172549, alpha: 1),
         UIColor(red: 0.839216, green: 0.152941, blue: 0.156863, alpha: 1),
         UIColor(red: 0.580392, green: 0.403922, blue: 0.741176, alpha: 1),
@@ -143,7 +145,7 @@ open class LineChart: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.clear        
     }
 
     convenience init() {
@@ -503,15 +505,15 @@ open class LineChart: UIView {
      */
     fileprivate func drawXLabels() {
         let xAxisData = self.dataStore[0]
-        let y = self.bounds.height - x.axis.inset
+        let y = self.bounds.height - 0
         let (_, _, step) = x.linear.ticks(xAxisData.count)
         let width = x.scale(step)
         
         var text: String
-        for (index, _) in xAxisData.enumerated() {
+        for (index, _) in x.labels.values.enumerated() {
             let xValue = self.x.scale(CGFloat(index)) + x.axis.inset - (width / 2)
             let label = UILabel(frame: CGRect(x: xValue, y: y, width: width, height: x.axis.inset))
-            label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2)
+            label.font = UIFont.applicationFontOfSize(15)
             label.textAlignment = .center
             if (x.labels.values.count != 0) {
                 text = x.labels.values[index]
@@ -533,10 +535,11 @@ open class LineChart: UIView {
         let (start, stop, step) = self.y.ticks
         for i in stride(from: start, through: stop, by: step){
             yValue = self.bounds.height - self.y.scale(i) - (y.axis.inset * 1.5)
-            let label = UILabel(frame: CGRect(x: 0, y: yValue, width: y.axis.inset, height: y.axis.inset))
-            label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.caption2)
+            let label = UILabel(frame: CGRect(x: -15, y: yValue, width: 35, height: y.axis.inset))
+            label.font = UIFont.applicationFontOfSize(15)
             label.textAlignment = .center
             label.text = String(Int(round(i)))
+            label.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
             self.addSubview(label)
         }
     }
