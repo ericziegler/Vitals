@@ -21,6 +21,16 @@ class VitalsLog {
     var vitalsCount: Int {
         return allVitals.count
     }
+    private var csvString: String {
+        var result = ""
+        for i in 0 ..< allVitals.count {
+            result += allVitals[i].csvString
+            if i < allVitals.count - 1 {
+                result += "\n"
+            }
+        }
+        return result
+    }
 
     // MARK: - Init
 
@@ -59,9 +69,28 @@ class VitalsLog {
             let data = try NSKeyedArchiver.archivedData(withRootObject: allVitals, requiringSecureCoding: false)
             UserDefaults.standard.set(data, forKey: VitalsCacheKey)
             UserDefaults.standard.synchronize()
+            backupData()
         } catch {
             print ("Failed to save vitals to user defaults.")
         }
+    }
+
+    private func backupData() {
+        guard let request = API.buildRequestFor(fileName: "update.php", params: ["contents" : csvString]) else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { [unowned self] (data, response, error) in
+            let response = API.buildJSONResponse(data: data, error: error)
+            if let error = response.1 {
+                print(error.localizedDescription)
+            }
+            else if let json = response.0 {
+                print(json.stringValue)
+            } else {
+                print("???")
+            }
+        }
+        task.resume()
     }
 
     // MARK: - Add / Remove

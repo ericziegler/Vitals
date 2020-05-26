@@ -44,6 +44,19 @@ class Vitals: NSObject, NSCoding {
     var systolic: Int?
     var diastolic: Int?
     var pulse: Int?
+    var csvString: String {
+        var result = ""
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M/d/yy"
+        result += "\(formatter.string(from: date)),"
+        result += "\(timeOfDay.rawValue),"
+        result += "\(weight ?? 0),"
+        result += "\(systolic ?? 0),"
+        result += "\(diastolic ?? 0),"
+        result += "\(pulse ?? 0),"
+        result += "\(temperature ?? 0)"
+        return result
+    }
 
     // MARK: Init + Coding
 
