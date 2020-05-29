@@ -159,6 +159,10 @@ extension String {
         return result
     }
 
+    static func generateIdentifier() -> String {
+        return UUID().uuidString.replacingOccurrences(of: "-", with: "")
+    }
+
 }
 
 // MARK: - MutableCollection

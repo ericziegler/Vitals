@@ -55,16 +55,24 @@ class VitalsCell: UITableViewCell {
             }
             if let weight = vitals.weight {
                 weightLabel.text = "\(weight) lbs."
+            } else {
+                weightLabel.text = "N/A"
             }
             if let temperature = vitals.temperature {
                 let formattedTemperature = Double(round(10 * temperature) / 10)
                 temperatureLabel.text = "\(formattedTemperature)º"
+            } else {
+                temperatureLabel.text = "N/A"
             }
             if let systolic = vitals.systolic, let diastolic = vitals.diastolic {
                 bloodPressureLabel.text = "\(systolic) / \(diastolic)"
+            } else {
+                bloodPressureLabel.text = "N/A"
             }
             if let pulse = vitals.pulse {
                 pulseLabel.text = "\(pulse) bpm"
+            } else {
+                pulseLabel.text = "N/A"
             }
         }
     }

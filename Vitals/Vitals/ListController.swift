@@ -14,12 +14,16 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     @IBOutlet var vitalsTable: UITableView!
 
+    var progressView: ProgressView?
+    var refreshControl = UIRefreshControl()
+
     // MARK: - Init
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        vitalsTable.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 10, right: 0)
         setupNavBar()
+        setupTable()
+        loadVitals()
     }
 
     private func setupNavBar() {
@@ -36,6 +40,32 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
         }
     }
 
+    private func setupTable() {
+        vitalsTable.contentInset = UIEdgeInsets(top: 5, left: 0, bottom: 10, right: 0)
+        vitalsTable.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshVitals(_:)), for: .valueChanged)
+    }
+
+    private func loadVitals(showProgress: Bool = true) {
+        if showProgress == true {
+            progressView = ProgressView.createProgressFor(parentController: self.navigationController!, title: "Loading")
+            progressView?.showProgress()
+        }
+        VitalsLog.shared.loadWithCompletion { [unowned self] (error) in
+            DispatchQueue.main.async {
+                self.progressView?.hideProgress()
+                self.refreshControl.endRefreshing()
+                if let error = error {
+                    let alert = UIAlertController(title: "Error Loading", message: error.localizedDescription, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                } else {
+                    self.vitalsTable.reloadData()
+                }
+            }
+        }
+    }
+
     // MARK: - Actions
 
     @IBAction func addTapped(_ sender: AnyObject) {
@@ -45,6 +75,12 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
     @IBAction func loadTapped(_ sender: AnyObject) {
         VitalsLog.shared.loadFromFile()
         vitalsTable.reloadData()
+    }
+
+    @objc func refreshVitals(_ sender: AnyObject) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+            self.loadVitals(showProgress: false)
+        }
     }
 
     // MARK: - Helpers

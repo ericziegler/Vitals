@@ -33,6 +33,8 @@
 		7841B11724747FB000011D81 /* VitalsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B11624747FB000011D81 /* VitalsCell.swift */; };
 		789B4710247D92050013CC12 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789B470F247D92050013CC12 /* API.swift */; };
 		789B4712247D92560013CC12 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789B4711247D92560013CC12 /* JSON.swift */; };
+		789B4745248144F30013CC12 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789B4743248144F30013CC12 /* ProgressView.swift */; };
+		789B4746248144F30013CC12 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789B4744248144F30013CC12 /* ProgressView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		7841B11624747FB000011D81 /* VitalsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsCell.swift; sourceTree = "<group>"; };
 		789B470F247D92050013CC12 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		789B4711247D92560013CC12 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		789B4743248144F30013CC12 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		789B4744248144F30013CC12 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 		7841B0F82474702C00011D81 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				789B4743248144F30013CC12 /* ProgressView.swift */,
+				789B4744248144F30013CC12 /* ProgressView.xib */,
 				7841B11624747FB000011D81 /* VitalsCell.swift */,
 			);
 			name = Views;
@@ -267,6 +273,7 @@
 				7841B0E92474700700011D81 /* Main.storyboard in Resources */,
 				78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */,
 				7841B111247471B100011D81 /* Roboto-Medium.ttf in Resources */,
+				789B4746248144F30013CC12 /* ProgressView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +290,7 @@
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				789B4710247D92050013CC12 /* API.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
+				789B4745248144F30013CC12 /* ProgressView.swift in Sources */,
 				78162F142476FD87006F6C42 /* LineChart.swift in Sources */,
 				78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */,
 				7841B1152474785B00011D81 /* Vitals.swift in Sources */,

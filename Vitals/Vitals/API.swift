@@ -11,6 +11,7 @@ import Foundation
 // MARK: - Constants
 
 let BaseURL = "https://zigabytesdev.com/vitals"
+let APISuccessStatus = "success"
 
 typealias RequestCompletionBlock = (_ error: APIError?) -> ()
 

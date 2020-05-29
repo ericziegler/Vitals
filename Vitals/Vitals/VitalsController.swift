@@ -206,10 +206,10 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
             vitals.pulse = pulse
         }
         if initialVitals == nil {
-            VitalsLog.shared.add(vitals: vitals)
+            VitalsLog.shared.add(vitals: vitals, completion: nil)
+        } else {
+            VitalsLog.shared.update(vitals: vitals, completion: nil)
         }
-        VitalsLog.shared.sortVitals()
-        VitalsLog.shared.save()
         delegate?.vitalsUpdatedFor(controller: self)
     }
 

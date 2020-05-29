@@ -8,16 +8,6 @@
 
 import Foundation
 
-// MARK: - Constants
-
-let TimeOfDayCacheKey = "TimeOfDayCacheKey"
-let DateCacheKey = "DateCacheKey"
-let TemperatureCacheKey = "TemperatureCacheKey"
-let WeightCacheKey = "WeightCacheKey"
-let SystolicCacheKey = "SystolicCacheKey"
-let DiastolicCacheKey = "DiastolicCacheKey"
-let PulseCacheKey = "PulseCacheKey"
-
 // MARK: - Enums
 
 enum TimeOfDay: Int {
@@ -33,10 +23,11 @@ enum TimeOfDay: Int {
     }
 }
 
-class Vitals: NSObject, NSCoding {
+class Vitals {
 
     // MARK: - Properties
 
+    var identifier: String!
     var timeOfDay: TimeOfDay!
     var date: Date!
     var temperature: Double?
@@ -44,24 +35,11 @@ class Vitals: NSObject, NSCoding {
     var systolic: Int?
     var diastolic: Int?
     var pulse: Int?
-    var csvString: String {
-        var result = ""
-        let formatter = DateFormatter()
-        formatter.dateFormat = "M/d/yy"
-        result += "\(formatter.string(from: date)),"
-        result += "\(timeOfDay.rawValue),"
-        result += "\(weight ?? 0),"
-        result += "\(systolic ?? 0),"
-        result += "\(diastolic ?? 0),"
-        result += "\(pulse ?? 0),"
-        result += "\(temperature ?? 0)"
-        return result
-    }
 
-    // MARK: Init + Coding
+    // MARK: Init
 
-    override init() {
-        super.init()
+    init() {
+        identifier = String.generateIdentifier()
         date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "a"
@@ -73,65 +51,24 @@ class Vitals: NSObject, NSCoding {
         }
     }
 
-    required init?(coder decoder: NSCoder) {
-        if let cachedTimeOfDay = decoder.decodeObject(forKey: TimeOfDayCacheKey) as? NSNumber {
-            timeOfDay = TimeOfDay(rawValue: cachedTimeOfDay.intValue)
+    init(props: [String : JSON]) {
+        identifier = props["id"]!.stringValue
+        date = Date(timeIntervalSince1970: props["timestamp"]!.doubleValue)
+        timeOfDay = TimeOfDay(rawValue: props["time_of_day"]!.intValue)
+        if props["weight"]!.intValue != 0 {
+            weight = props["weight"]!.intValue
         }
-        if let cachedDate = decoder.decodeObject(forKey: DateCacheKey) as? Date {
-            date = cachedDate
+        if props["systolic"]!.intValue != 0 {
+            systolic = props["systolic"]!.intValue
         }
-        if let cachedTemperature = decoder.decodeObject(forKey: TemperatureCacheKey) as? NSNumber {
-            temperature = cachedTemperature.doubleValue
+        if props["diastolic"]!.intValue != 0 {
+            diastolic = props["diastolic"]!.intValue
         }
-        if let cachedWeight = decoder.decodeObject(forKey: WeightCacheKey) as? NSNumber {
-            weight = cachedWeight.intValue
+        if props["heart_rate"]!.intValue != 0 {
+            pulse = props["heart_rate"]!.intValue
         }
-        if let cachedSystolic = decoder.decodeObject(forKey: SystolicCacheKey) as? NSNumber {
-            systolic = cachedSystolic.intValue
-        }
-        if let cachedDiastolic = decoder.decodeObject(forKey: DiastolicCacheKey) as? NSNumber {
-            diastolic = cachedDiastolic.intValue
-        }
-        if let cachedPulse = decoder.decodeObject(forKey: PulseCacheKey) as? NSNumber {
-            pulse = cachedPulse.intValue
-        }
-    }
-
-    func encode(with encoder: NSCoder) {
-        if let timeOfDayToCache = timeOfDay {
-            encoder.encode(NSNumber(integerLiteral: timeOfDayToCache.rawValue), forKey: TimeOfDayCacheKey)
-        } else {
-            encoder.encode(nil, forKey: TimeOfDayCacheKey)
-        }
-        if let dateToCache = date {
-            encoder.encode(dateToCache, forKey: DateCacheKey)
-        } else {
-            encoder.encode(nil, forKey: DateCacheKey)
-        }
-        if let tempToCache = temperature {
-            encoder.encode(NSNumber(value: tempToCache), forKey: TemperatureCacheKey)
-        } else {
-            encoder.encode(nil, forKey: TemperatureCacheKey)
-        }
-        if let weightToCache = weight {
-            encoder.encode(NSNumber(integerLiteral: weightToCache), forKey: WeightCacheKey)
-        } else {
-            encoder.encode(nil, forKey: WeightCacheKey)
-        }
-        if let systolicToCache = systolic {
-            encoder.encode(NSNumber(integerLiteral: systolicToCache), forKey: SystolicCacheKey)
-        } else {
-            encoder.encode(nil, forKey: SystolicCacheKey)
-        }
-        if let diastolicToCache = diastolic {
-            encoder.encode(NSNumber(integerLiteral: diastolicToCache), forKey: DiastolicCacheKey)
-        } else {
-            encoder.encode(nil, forKey: DiastolicCacheKey)
-        }
-        if let pulseToCache = pulse {
-            encoder.encode(NSNumber(integerLiteral: pulseToCache), forKey: PulseCacheKey)
-        } else {
-            encoder.encode(nil, forKey: PulseCacheKey)
+        if props["temperature"]!.doubleValue != 0 {
+            temperature = props["temperature"]!.doubleValue
         }
     }
 

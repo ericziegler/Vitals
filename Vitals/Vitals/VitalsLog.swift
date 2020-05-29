@@ -10,8 +10,6 @@ import Foundation
 
 // MARK: - Constants
 
-let VitalsCacheKey = "VitalsCacheKey"
-
 class VitalsLog {
 
     // MARK: - Properties
@@ -21,36 +19,41 @@ class VitalsLog {
     var vitalsCount: Int {
         return allVitals.count
     }
-    private var csvString: String {
-        var result = ""
-        for i in 0 ..< allVitals.count {
-            result += allVitals[i].csvString
-            if i < allVitals.count - 1 {
-                result += "\n"
-            }
-        }
-        return result
-    }
-
-    // MARK: - Init
-
-    init() {
-        load()
-    }
 
     // MARK: - Load / Save
 
-    func load() {
-        if let data = UserDefaults.standard.data(forKey: VitalsCacheKey) {
-            do {
-                if let cachedVitals = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(data) as? [Vitals] {
-                    allVitals = cachedVitals
-                    sortVitals()
+    func loadWithCompletion(completion: RequestCompletionBlock?) {
+        guard let request = API.buildRequestFor(fileName: "load_vitals.php", params: [:]) else {
+            completion?(.invalidRequest)
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { [unowned self] (data, response, error) in
+            let response = API.buildJSONResponse(data: data, error: error)
+            if let error = response.1 {
+                completion?(APIError.custom(message: error.localizedDescription))
+            }
+            else if let json = response.0 {
+                let status = json.dictionaryValue["status"]!.stringValue
+                if status == APISuccessStatus {
+                    self.allVitals.removeAll()
+                    if let vitalsProps = json.dictionaryValue["vitals"]?.array {
+                        for curVitalsProps in vitalsProps {
+                            if let curVitalsDict = curVitalsProps.dictionary {
+                                let vitals = Vitals(props: curVitalsDict)
+                                self.allVitals.append(vitals)
+                            }
+                        }
+                    }
+                    self.sortVitals()
+                    completion?(nil)
+                } else {
+                    completion?(APIError.custom(message: status))
                 }
-            } catch {
-                print("Failed to load vitals from user defaults.")
+            } else {
+                completion?(.unknown)
             }
         }
+        task.resume()
     }
 
     func loadFromFile() {
@@ -64,38 +67,9 @@ class VitalsLog {
         }
     }
 
-    func save() {
-        do {
-            let data = try NSKeyedArchiver.archivedData(withRootObject: allVitals, requiringSecureCoding: false)
-            UserDefaults.standard.set(data, forKey: VitalsCacheKey)
-            UserDefaults.standard.synchronize()
-            backupData()
-        } catch {
-            print ("Failed to save vitals to user defaults.")
-        }
-    }
-
-    private func backupData() {
-        guard let request = API.buildRequestFor(fileName: "update.php", params: ["contents" : csvString]) else {
-            return
-        }
-        let task = URLSession.shared.dataTask(with: request) { [unowned self] (data, response, error) in
-            let response = API.buildJSONResponse(data: data, error: error)
-            if let error = response.1 {
-                print(error.localizedDescription)
-            }
-            else if let json = response.0 {
-                print(json.stringValue)
-            } else {
-                print("???")
-            }
-        }
-        task.resume()
-    }
-
     // MARK: - Add / Remove
 
-    func add(vitals: Vitals) {
+    func tempAdd(vitals: Vitals) {
         if vitals.timeOfDay == .am {
             vitals.date = vitals.date.dateAtBeginningOfDay()
         } else {
@@ -103,13 +77,61 @@ class VitalsLog {
         }
         allVitals.append(vitals)
         sortVitals()
-        save()
     }
 
-    func removeAt(index: Int) {
-        allVitals.remove(at: index)
+    func add(vitals: Vitals, completion: RequestCompletionBlock?) {
+        if vitals.timeOfDay == .am {
+            vitals.date = vitals.date.dateAtBeginningOfDay()
+        } else {
+            vitals.date = vitals.date.dateAtBeginningOfDay().dateByAddingHours(13)!
+        }
+        allVitals.append(vitals)
         sortVitals()
-        save()
+
+        guard let request = API.buildRequestFor(fileName: "add_vitals.php", params: ["id" : vitals.identifier, "timestamp" : "\(vitals.date.timeIntervalSince1970)", "time_of_day" : "\(vitals.timeOfDay.rawValue)", "weight" : "\(vitals.weight ?? 0)", "systolic" : "\(vitals.systolic ?? 0)", "diastolic" : "\(vitals.diastolic ?? 0)", "heart_rate" : "\(vitals.pulse ?? 0)", "temperature" : "\(vitals.temperature ?? 0.0)"]) else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let response = API.buildJSONResponse(data: data, error: error)
+            if let error = response.1 {
+                completion?(APIError.custom(message: error.localizedDescription))
+            }
+            else if let json = response.0 {
+                let status = json.dictionaryValue["status"]!.stringValue
+                if status == APISuccessStatus {                    
+                    completion?(nil)
+                } else {
+                    completion?(APIError.custom(message: status))
+                }
+            } else {
+                completion?(.unknown)
+            }
+        }
+        task.resume()
+    }
+
+    func update(vitals: Vitals, completion: RequestCompletionBlock?) {
+        sortVitals()
+        guard let request = API.buildRequestFor(fileName: "update_vitals.php", params: ["id" : vitals.identifier, "timestamp" : "\(vitals.date.timeIntervalSince1970)", "time_of_day" : "\(vitals.timeOfDay.rawValue)", "weight" : "\(vitals.weight ?? 0)", "systolic" : "\(vitals.systolic ?? 0)", "diastolic" : "\(vitals.diastolic ?? 0)", "heart_rate" : "\(vitals.pulse ?? 0)", "temperature" : "\(vitals.temperature ?? 0.0)"]) else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let response = API.buildJSONResponse(data: data, error: error)
+            if let error = response.1 {
+                completion?(APIError.custom(message: error.localizedDescription))
+            }
+            else if let json = response.0 {
+                let status = json.dictionaryValue["status"]!.stringValue
+                if status == APISuccessStatus {
+                    completion?(nil)
+                } else {
+                    completion?(APIError.custom(message: status))
+                }
+            } else {
+                completion?(.unknown)
+            }
+        }
+        task.resume()
     }
 
     // MARK: - Helpers
@@ -156,11 +178,10 @@ class VitalsLog {
                 if vitalsComponents[6] != "0" {
                     vitals.temperature = Double(vitalsComponents[6])
                 }
-                self.add(vitals: vitals)
+                self.tempAdd(vitals: vitals)
             }
         }
         self.sortVitals()
-        self.save()
     }
 
 }

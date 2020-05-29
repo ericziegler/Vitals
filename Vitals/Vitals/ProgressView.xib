@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1cF-ud-ZPK" customClass="ProgressView" customModule="BaseProject" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4A6-0p-Wnb">
+                    <rect key="frame" x="85" y="343" width="244" height="210"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f1a-Gu-pSx" customClass="RegularLabel" customModule="BaseProject" customModuleProvider="target">
+                            <rect key="frame" x="8" y="24" width="228" height="37"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="37" id="LRB-8K-cYp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="20"/>
+                            <color key="textColor" red="0.2666666667" green="0.2666666667" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tea-dp-ySG" customClass="CircularLoadingView" customModule="BaseProject" customModuleProvider="target">
+                            <rect key="frame" x="77" y="85" width="90" height="90"/>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="90" id="1Kh-PX-eLO"/>
+                                <constraint firstAttribute="width" constant="90" id="hoE-IX-Ua2"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="f1a-Gu-pSx" secondAttribute="trailing" constant="8" id="1nK-ES-76g"/>
+                        <constraint firstItem="f1a-Gu-pSx" firstAttribute="leading" secondItem="4A6-0p-Wnb" secondAttribute="leading" constant="8" id="DJq-ke-fYY"/>
+                        <constraint firstItem="tea-dp-ySG" firstAttribute="top" secondItem="f1a-Gu-pSx" secondAttribute="bottom" constant="24" id="PV6-0Y-ccv"/>
+                        <constraint firstAttribute="height" constant="210" id="i3K-rZ-mfQ"/>
+                        <constraint firstItem="f1a-Gu-pSx" firstAttribute="top" secondItem="4A6-0p-Wnb" secondAttribute="top" constant="24" id="nW3-ea-LHP"/>
+                        <constraint firstItem="tea-dp-ySG" firstAttribute="centerX" secondItem="4A6-0p-Wnb" secondAttribute="centerX" id="otu-oA-fea"/>
+                        <constraint firstAttribute="width" constant="244" id="t9d-bN-5R3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.45000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="4A6-0p-Wnb" firstAttribute="centerX" secondItem="1cF-ud-ZPK" secondAttribute="centerX" id="9Xc-b5-LGN"/>
+                <constraint firstItem="4A6-0p-Wnb" firstAttribute="centerY" secondItem="1cF-ud-ZPK" secondAttribute="centerY" id="AIi-hS-x1Z"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="OCn-Qc-9Sg"/>
+            <connections>
+                <outlet property="bgView" destination="4A6-0p-Wnb" id="3Xd-ei-fbh"/>
+                <outlet property="circularLoader" destination="tea-dp-ySG" id="9bo-jM-T7b"/>
+                <outlet property="titleLabel" destination="f1a-Gu-pSx" id="wVT-xr-Qjx"/>
+            </connections>
+            <point key="canvasLocation" x="13.043478260869566" y="144.64285714285714"/>
+        </view>
+    </objects>
+</document>
