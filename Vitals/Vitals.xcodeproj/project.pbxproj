@@ -12,6 +12,7 @@
 		78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = 78162F112476E1F9006F6C42 /* vitalsdata.csv */; };
 		78162F142476FD87006F6C42 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F132476FD87006F6C42 /* LineChart.swift */; };
 		78162F162476FDE0006F6C42 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F152476FDE0006F6C42 /* GraphController.swift */; };
+		78256AAE248E867400862035 /* ChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78256AAD248E867400862035 /* ChartController.swift */; };
 		7841B0E22474700700011D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E12474700700011D81 /* AppDelegate.swift */; };
 		7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E32474700700011D81 /* SceneDelegate.swift */; };
 		7841B0E62474700700011D81 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* ListController.swift */; };
@@ -43,6 +44,7 @@
 		78162F112476E1F9006F6C42 /* vitalsdata.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = vitalsdata.csv; sourceTree = "<group>"; };
 		78162F132476FD87006F6C42 /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		78162F152476FDE0006F6C42 /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
+		78256AAD248E867400862035 /* ChartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartController.swift; sourceTree = "<group>"; };
 		7841B0DE2474700700011D81 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7841B0E12474700700011D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7841B0E32474700700011D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 				7841B0E52474700700011D81 /* ListController.swift */,
 				78162F0D247571E8006F6C42 /* VitalsController.swift */,
 				78162F0F2475D147006F6C42 /* DatePickerController.swift */,
+				78256AAD248E867400862035 /* ChartController.swift */,
 				78162F152476FDE0006F6C42 /* GraphController.swift */,
 			);
 			name = ViewControllers;
@@ -290,6 +293,7 @@
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				789B4710247D92050013CC12 /* API.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
+				78256AAE248E867400862035 /* ChartController.swift in Sources */,
 				789B4745248144F30013CC12 /* ProgressView.swift in Sources */,
 				78162F142476FD87006F6C42 /* LineChart.swift in Sources */,
 				78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */,

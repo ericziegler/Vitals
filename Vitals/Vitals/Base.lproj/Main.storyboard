@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ZhZ-xq-dIP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Q5T-P8-0Dj">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,10 +18,11 @@
         </array>
     </customFonts>
     <scenes>
-        <!--Base Navigation Controller-->
+        <!--Vitals-->
         <scene sceneID="uig-Zg-gGB">
             <objects>
                 <navigationController id="ZhZ-xq-dIP" customClass="BaseNavigationController" customModule="Vitals" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Vitals" image="TabVitals" id="7cD-Wx-aOr"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7fc-wb-BNS">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -32,7 +33,40 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AWW-uU-QiK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-626" y="110"/>
+            <point key="canvasLocation" x="-664" y="-573"/>
+        </scene>
+        <!--Chart-->
+        <scene sceneID="Dxp-UN-siw">
+            <objects>
+                <navigationController id="ElW-mg-4aJ" customClass="BaseNavigationController" customModule="Vitals" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Chart" image="TabChart" id="ur4-Nh-Kjn"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iaT-lt-POq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="sOE-HY-dCy" kind="relationship" relationship="rootViewController" id="Bxo-n2-hJB"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HUc-mQ-n0H" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-665" y="129"/>
+        </scene>
+        <!--Chart Controller-->
+        <scene sceneID="3AB-eM-wqk">
+            <objects>
+                <viewController id="sOE-HY-dCy" customClass="ChartController" customModule="Vitals" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Pcn-eg-sjI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="any-81-f0x"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="789-aB-W9R"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="czF-nl-bBv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="100.00000000000001" y="128.57142857142856"/>
         </scene>
         <!--List Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -189,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="109.82142857142857"/>
+            <point key="canvasLocation" x="100" y="-573"/>
         </scene>
         <!--Vitals Controller-->
         <scene sceneID="x6I-N3-seX">
@@ -500,7 +534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WGM-we-zvD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="824.63768115942037" y="109.82142857142857"/>
+            <point key="canvasLocation" x="787" y="-573"/>
         </scene>
         <!--Date Picker Controller-->
         <scene sceneID="sbq-HC-O7i">
@@ -552,7 +586,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eYa-ai-3hs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1525" y="109"/>
+            <point key="canvasLocation" x="1487" y="-574"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="wbV-RZ-NXN">
@@ -569,6 +603,26 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GWe-eA-lVC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-626" y="826"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="RY4-HS-Ikr">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tH8-rm-Vkg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tabBarController id="Q5T-P8-0Dj" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XdI-q2-5AB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.48627450980392156" green="0.25098039215686274" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.48627450979999998" green="0.25098039220000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="ZhZ-xq-dIP" kind="relationship" relationship="viewControllers" id="NJt-Rm-2mx"/>
+                        <segue destination="ElW-mg-4aJ" kind="relationship" relationship="viewControllers" id="5Ue-lF-RDn"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="-1629" y="-198"/>
         </scene>
         <!--Graph Controller-->
         <scene sceneID="J1g-aU-0Xw">
@@ -742,6 +796,8 @@
         <image name="BloodPressure" width="16" height="22"/>
         <image name="Disclosure" width="33.5" height="22"/>
         <image name="HeartRate" width="22" height="22"/>
+        <image name="TabChart" width="23" height="19.5"/>
+        <image name="TabVitals" width="23" height="20.5"/>
         <image name="Temperature" width="12" height="22"/>
         <image name="Weight" width="22" height="22"/>
     </resources>
