@@ -15,7 +15,8 @@ let VitalsControllerId = "VitalsControllerId"
 // MARK: - Protocols
 
 protocol VitalsControllerDelegate {
-    func vitalsUpdatedFor(controller: VitalsController)
+    func vitalsAdded(success: Bool, controller: VitalsController)
+    func vitalsUpdated(success: Bool, controller: VitalsController)
 }
 
 class VitalsController: BaseViewController, DatePickerControllerDelegate {
@@ -206,11 +207,22 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
             vitals.pulse = pulse
         }
         if initialVitals == nil {
-            VitalsLog.shared.add(vitals: vitals, completion: nil)
+            VitalsLog.shared.add(vitals: vitals) { [unowned self] (error) in
+                if let _ = error {
+                    self.delegate?.vitalsAdded(success: false, controller: self)
+                } else {
+                    self.delegate?.vitalsAdded(success: true, controller: self)
+                }
+            }
         } else {
-            VitalsLog.shared.update(vitals: vitals, completion: nil)
+            VitalsLog.shared.update(vitals: vitals) { [unowned self] (error) in
+                if let _ = error {
+                    self.delegate?.vitalsUpdated(success: false, controller: self)
+                } else {
+                    self.delegate?.vitalsUpdated(success: true, controller: self)
+                }
+            }
         }
-        delegate?.vitalsUpdatedFor(controller: self)
     }
 
     // MARK: - UITextFieldDelegate

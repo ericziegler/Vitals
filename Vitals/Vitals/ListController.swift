@@ -91,6 +91,14 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
         self.present(navController, animated: true, completion: nil)
     }
 
+    private func showStatusToast(success: Bool, isUpdate: Bool) {
+        let bgColor = (success == true) ? UIColor(hex: 0x63cf8f) : UIColor(hex: 0xe75c57)
+        let textColor = UIColor.white
+        let statusText = (success == true) ? "✓ Vitals Saved!" : "⚠ Vitals Not Saved"
+        let toast = StatusToastView.createToastFor(parentViewController: self, status: statusText, backgroundColor: bgColor, foregroundColor: textColor)
+        toast.showToast()
+    }
+
     // MARK: - UITableViewDataSource / UITableViewDelegate
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,8 +123,18 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     // MARK: - VitalsControllerDelegate
 
-    func vitalsUpdatedFor(controller: VitalsController) {
-        vitalsTable.reloadData()
+    func vitalsAdded(success: Bool, controller: VitalsController) {
+        DispatchQueue.main.async {
+            self.showStatusToast(success: success, isUpdate: false)
+            self.vitalsTable.reloadData()
+        }
+    }
+
+    func vitalsUpdated(success: Bool, controller: VitalsController) {
+        DispatchQueue.main.async {
+            self.showStatusToast(success: success, isUpdate: true)
+            self.vitalsTable.reloadData()
+        }
     }
 
 }

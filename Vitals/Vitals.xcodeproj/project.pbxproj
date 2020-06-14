@@ -40,6 +40,8 @@
 		789B4712247D92560013CC12 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789B4711247D92560013CC12 /* JSON.swift */; };
 		789B4745248144F30013CC12 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789B4743248144F30013CC12 /* ProgressView.swift */; };
 		789B4746248144F30013CC12 /* ProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789B4744248144F30013CC12 /* ProgressView.xib */; };
+		78C085FC249647CA007D8A0D /* StatusToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C085FB249647CA007D8A0D /* StatusToastView.swift */; };
+		78C085FE249647D5007D8A0D /* StatusToastView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78C085FD249647D5007D8A0D /* StatusToastView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +81,8 @@
 		789B4711247D92560013CC12 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		789B4743248144F30013CC12 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		789B4744248144F30013CC12 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
+		78C085FB249647CA007D8A0D /* StatusToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusToastView.swift; sourceTree = "<group>"; };
+		78C085FD249647D5007D8A0D /* StatusToastView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusToastView.xib; sourceTree = "<group>"; };
 		EE7A2533073C96874B7C2DAE /* Pods_Vitals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vitals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -161,6 +165,8 @@
 			children = (
 				789B4743248144F30013CC12 /* ProgressView.swift */,
 				789B4744248144F30013CC12 /* ProgressView.xib */,
+				78C085FB249647CA007D8A0D /* StatusToastView.swift */,
+				78C085FD249647D5007D8A0D /* StatusToastView.xib */,
 				7841B11624747FB000011D81 /* VitalsCell.swift */,
 				78256AB1248E919300862035 /* ChartCell.swift */,
 			);
@@ -307,6 +313,7 @@
 				7841B10D247471B100011D81 /* Roboto-Regular.ttf in Resources */,
 				7841B10F247471B100011D81 /* Roboto-Italic.ttf in Resources */,
 				7841B0EB2474700800011D81 /* Assets.xcassets in Resources */,
+				78C085FE249647D5007D8A0D /* StatusToastView.xib in Resources */,
 				7841B110247471B100011D81 /* Roboto-Light.ttf in Resources */,
 				7841B0E92474700700011D81 /* Main.storyboard in Resources */,
 				78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */,
@@ -382,6 +389,7 @@
 				78162F102475D147006F6C42 /* DatePickerController.swift in Sources */,
 				78256AB2248E919300862035 /* ChartCell.swift in Sources */,
 				7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */,
+				78C085FC249647CA007D8A0D /* StatusToastView.swift in Sources */,
 				78162F162476FDE0006F6C42 /* GraphController.swift in Sources */,
 				7841B1132474781600011D81 /* VitalsLog.swift in Sources */,
 				789B4712247D92560013CC12 /* JSON.swift in Sources */,
