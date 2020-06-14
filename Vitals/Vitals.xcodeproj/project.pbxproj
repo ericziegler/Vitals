@@ -3,16 +3,20 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		63A5B6212021D86D9A4962E1 /* Pods_Vitals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE7A2533073C96874B7C2DAE /* Pods_Vitals.framework */; };
 		78162F0E247571E8006F6C42 /* VitalsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0D247571E8006F6C42 /* VitalsController.swift */; };
 		78162F102475D147006F6C42 /* DatePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F0F2475D147006F6C42 /* DatePickerController.swift */; };
 		78162F122476E1F9006F6C42 /* vitalsdata.csv in Resources */ = {isa = PBXBuildFile; fileRef = 78162F112476E1F9006F6C42 /* vitalsdata.csv */; };
 		78162F142476FD87006F6C42 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F132476FD87006F6C42 /* LineChart.swift */; };
 		78162F162476FDE0006F6C42 /* GraphController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78162F152476FDE0006F6C42 /* GraphController.swift */; };
 		78256AAE248E867400862035 /* ChartController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78256AAD248E867400862035 /* ChartController.swift */; };
+		78256AB2248E919300862035 /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78256AB1248E919300862035 /* ChartCell.swift */; };
+		78256AB4248E99B700862035 /* ChartData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78256AB3248E99B700862035 /* ChartData.swift */; };
+		78256AB6248E9A7A00862035 /* ChartDateVitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78256AB5248E9A7A00862035 /* ChartDateVitals.swift */; };
 		7841B0E22474700700011D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E12474700700011D81 /* AppDelegate.swift */; };
 		7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E32474700700011D81 /* SceneDelegate.swift */; };
 		7841B0E62474700700011D81 /* ListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7841B0E52474700700011D81 /* ListController.swift */; };
@@ -39,12 +43,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		37FDFD1FFB4F541A454F2626 /* Pods-Vitals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.release.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.release.xcconfig"; sourceTree = "<group>"; };
+		5F7469606C3F769A7E15C08E /* Pods-Vitals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vitals.debug.xcconfig"; path = "Target Support Files/Pods-Vitals/Pods-Vitals.debug.xcconfig"; sourceTree = "<group>"; };
 		78162F0D247571E8006F6C42 /* VitalsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsController.swift; sourceTree = "<group>"; };
 		78162F0F2475D147006F6C42 /* DatePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerController.swift; sourceTree = "<group>"; };
 		78162F112476E1F9006F6C42 /* vitalsdata.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = vitalsdata.csv; sourceTree = "<group>"; };
 		78162F132476FD87006F6C42 /* LineChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
 		78162F152476FDE0006F6C42 /* GraphController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphController.swift; sourceTree = "<group>"; };
 		78256AAD248E867400862035 /* ChartController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartController.swift; sourceTree = "<group>"; };
+		78256AB1248E919300862035 /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
+		78256AB3248E99B700862035 /* ChartData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartData.swift; sourceTree = "<group>"; };
+		78256AB5248E9A7A00862035 /* ChartDateVitals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartDateVitals.swift; sourceTree = "<group>"; };
 		7841B0DE2474700700011D81 /* Vitals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vitals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7841B0E12474700700011D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7841B0E32474700700011D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +79,7 @@
 		789B4711247D92560013CC12 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		789B4743248144F30013CC12 /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
 		789B4744248144F30013CC12 /* ProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressView.xib; sourceTree = "<group>"; };
+		EE7A2533073C96874B7C2DAE /* Pods_Vitals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vitals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63A5B6212021D86D9A4962E1 /* Pods_Vitals.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,6 +99,8 @@
 			children = (
 				7841B0E02474700700011D81 /* Vitals */,
 				7841B0DF2474700700011D81 /* Products */,
+				D29416B1CC8FBBEF3D5A4D4D /* Pods */,
+				DF266D49C45F635BEF4A9099 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +162,7 @@
 				789B4743248144F30013CC12 /* ProgressView.swift */,
 				789B4744248144F30013CC12 /* ProgressView.xib */,
 				7841B11624747FB000011D81 /* VitalsCell.swift */,
+				78256AB1248E919300862035 /* ChartCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -159,6 +173,8 @@
 				7841B1122474781600011D81 /* VitalsLog.swift */,
 				7841B1142474785B00011D81 /* Vitals.swift */,
 				789B470F247D92050013CC12 /* API.swift */,
+				78256AB3248E99B700862035 /* ChartData.swift */,
+				78256AB5248E9A7A00862035 /* ChartDateVitals.swift */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -208,6 +224,23 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		D29416B1CC8FBBEF3D5A4D4D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				5F7469606C3F769A7E15C08E /* Pods-Vitals.debug.xcconfig */,
+				37FDFD1FFB4F541A454F2626 /* Pods-Vitals.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DF266D49C45F635BEF4A9099 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE7A2533073C96874B7C2DAE /* Pods_Vitals.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -215,9 +248,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7841B0F22474700800011D81 /* Build configuration list for PBXNativeTarget "Vitals" */;
 			buildPhases = (
+				572A6149F6E25397BC811C75 /* [CP] Check Pods Manifest.lock */,
 				7841B0DA2474700700011D81 /* Sources */,
 				7841B0DB2474700700011D81 /* Frameworks */,
 				7841B0DC2474700700011D81 /* Resources */,
+				4396AD27375575FF0DB8A068 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -282,6 +317,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4396AD27375575FF0DB8A068 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Vitals/Pods-Vitals-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Vitals/Pods-Vitals-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Vitals/Pods-Vitals-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		572A6149F6E25397BC811C75 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Vitals-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7841B0DA2474700700011D81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -292,7 +369,9 @@
 				7841B11724747FB000011D81 /* VitalsCell.swift in Sources */,
 				7841B1032474707000011D81 /* FoundationExtensions.swift in Sources */,
 				789B4710247D92050013CC12 /* API.swift in Sources */,
+				78256AB6248E9A7A00862035 /* ChartDateVitals.swift in Sources */,
 				7841B0E22474700700011D81 /* AppDelegate.swift in Sources */,
+				78256AB4248E99B700862035 /* ChartData.swift in Sources */,
 				78256AAE248E867400862035 /* ChartController.swift in Sources */,
 				789B4745248144F30013CC12 /* ProgressView.swift in Sources */,
 				78162F142476FD87006F6C42 /* LineChart.swift in Sources */,
@@ -301,6 +380,7 @@
 				7841B1002474706400011D81 /* BaseNavigationController.swift in Sources */,
 				7841B1042474707000011D81 /* UIKitExtensions.swift in Sources */,
 				78162F102475D147006F6C42 /* DatePickerController.swift in Sources */,
+				78256AB2248E919300862035 /* ChartCell.swift in Sources */,
 				7841B0E42474700700011D81 /* SceneDelegate.swift in Sources */,
 				78162F162476FDE0006F6C42 /* GraphController.swift in Sources */,
 				7841B1132474781600011D81 /* VitalsLog.swift in Sources */,
@@ -446,6 +526,7 @@
 		};
 		7841B0F32474700800011D81 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5F7469606C3F769A7E15C08E /* Pods-Vitals.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -467,6 +548,7 @@
 		};
 		7841B0F42474700800011D81 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 37FDFD1FFB4F541A454F2626 /* Pods-Vitals.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

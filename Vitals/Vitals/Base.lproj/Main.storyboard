@@ -35,11 +35,11 @@
             </objects>
             <point key="canvasLocation" x="-664" y="-573"/>
         </scene>
-        <!--Chart-->
+        <!--Log-->
         <scene sceneID="Dxp-UN-siw">
             <objects>
                 <navigationController id="ElW-mg-4aJ" customClass="BaseNavigationController" customModule="Vitals" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chart" image="TabChart" id="ur4-Nh-Kjn"/>
+                    <tabBarItem key="tabBarItem" title="Log" image="TabChart" id="ur4-Nh-Kjn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="iaT-lt-POq">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -59,10 +59,25 @@
                     <view key="view" contentMode="scaleToFill" id="Pcn-eg-sjI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BYy-91-AUg" customClass="SpreadsheetView" customModule="SpreadsheetView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="BYy-91-AUg" firstAttribute="leading" secondItem="any-81-f0x" secondAttribute="leading" id="liQ-py-cAl"/>
+                            <constraint firstItem="BYy-91-AUg" firstAttribute="top" secondItem="any-81-f0x" secondAttribute="top" id="un0-Ii-qog"/>
+                            <constraint firstItem="any-81-f0x" firstAttribute="trailing" secondItem="BYy-91-AUg" secondAttribute="trailing" id="v9m-Sa-lZG"/>
+                            <constraint firstItem="any-81-f0x" firstAttribute="bottom" secondItem="BYy-91-AUg" secondAttribute="bottom" id="xpo-sp-W2X"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="any-81-f0x"/>
                     </view>
                     <navigationItem key="navigationItem" id="789-aB-W9R"/>
+                    <connections>
+                        <outlet property="vitalsSheet" destination="BYy-91-AUg" id="UBQ-zT-4GV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="czF-nl-bBv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -607,7 +622,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="RY4-HS-Ikr">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="tH8-rm-Vkg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="Q5T-P8-0Dj" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XdI-q2-5AB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -621,6 +635,7 @@
                         <segue destination="ElW-mg-4aJ" kind="relationship" relationship="viewControllers" id="5Ue-lF-RDn"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tH8-rm-Vkg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1629" y="-198"/>
         </scene>

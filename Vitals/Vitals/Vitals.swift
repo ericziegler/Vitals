@@ -35,6 +35,9 @@ class Vitals {
     var systolic: Int?
     var diastolic: Int?
     var pulse: Int?
+    var timestamp: Double {
+        return date.dateAtBeginningOfDay().timeIntervalSince1970
+    }
 
     // MARK: Init
 

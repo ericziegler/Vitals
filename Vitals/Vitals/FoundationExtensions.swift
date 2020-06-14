@@ -163,6 +163,24 @@ extension String {
         return UUID().uuidString.replacingOccurrences(of: "-", with: "")
     }
 
+    func writeToFile(fileName: String) -> Bool {
+        var status = true
+
+        if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            let fileURL = dir.appendingPathComponent(fileName)
+            do {
+                try self.write(to: fileURL, atomically: false, encoding: .utf8)
+            }
+            catch {
+                status = false
+            }
+        } else {
+            status = false
+        }
+
+        return status
+    }
+
 }
 
 // MARK: - MutableCollection
