@@ -119,8 +119,7 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
     }
 
     @IBAction func saveTapped(_ sender: AnyObject) {
-        saveVitals()
-        self.dismiss(animated: true, completion: nil)
+        saveVitals()        
     }
 
     @objc func nextTapped(_ sender: AnyObject) {

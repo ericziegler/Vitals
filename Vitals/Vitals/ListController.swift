@@ -125,6 +125,7 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     func vitalsAdded(success: Bool, controller: VitalsController) {
         DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
             self.showStatusToast(success: success, isUpdate: false)
             self.vitalsTable.reloadData()
         }
@@ -132,6 +133,7 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     func vitalsUpdated(success: Bool, controller: VitalsController) {
         DispatchQueue.main.async {
+            self.dismiss(animated: true, completion: nil)
             self.showStatusToast(success: success, isUpdate: true)
             self.vitalsTable.reloadData()
         }
