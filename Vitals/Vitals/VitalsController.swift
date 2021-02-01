@@ -72,6 +72,9 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
     }
 
     private func setupNavBar() {
+//        let simButton = UIBarButtonItem(title: "_", style: .plain, target: self, action: #selector(simTapped(_:)))
+//        self.navigationItem.leftBarButtonItem = simButton
+
         if let closeImage = UIImage(named: "Close") {
             let closeButton = UIButton(type: .custom)
             closeButton.addTarget(self, action: #selector(closeTapped(_:)), for: .touchUpInside)
@@ -108,6 +111,10 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
     }
 
     // MARK: - Actions
+
+    @IBAction func simTapped(_ sender: AnyObject) {
+        simData()
+    }
 
     @IBAction func closeTapped(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
@@ -174,6 +181,9 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
     }
 
     private func saveVitals() {
+        DispatchQueue.main.async {
+            self.saveButton.isEnabled = false
+        }
         let vitals = initialVitals ?? Vitals()
         // update time and date
         if let dateTimeComponents = dateLabel.text?.components(separatedBy: " - ") {
@@ -212,6 +222,9 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
                 } else {
                     self.delegate?.vitalsAdded(success: true, controller: self)
                 }
+                DispatchQueue.main.async {
+                    self.saveButton.isEnabled = true
+                }
             }
         } else {
             VitalsLog.shared.update(vitals: vitals) { [unowned self] (error) in
@@ -220,8 +233,52 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
                 } else {
                     self.delegate?.vitalsUpdated(success: true, controller: self)
                 }
+                DispatchQueue.main.async {
+                    self.saveButton.isEnabled = true
+                }
             }
         }
+    }
+
+    private func simData() {
+        // get time of day
+        var timeOfDay = TimeOfDay.pm
+
+        // update time and date
+        if let dateTimeComponents = dateLabel.text?.components(separatedBy: " - ") {
+            if let timeComponent = dateTimeComponents.last {
+                if timeComponent == "AM" {
+                    timeOfDay = .am
+                } else {
+                    timeOfDay = .pm
+                }
+            }
+        }
+
+        var simSystolic = 0
+        var simDiastolic = 0
+        let rawTemp = Int.random(in: 959...980)
+        let simTemperature: Double = Double(rawTemp) / 10.0
+        var simPulse = 0
+        var simWeight = 0
+        if timeOfDay == .am {
+            simWeight = Int.random(in: 220...222)
+            simPulse = Int.random(in: 60...72)
+            simSystolic = Int.random(in: 120...135)
+            simDiastolic = Int.random(in: 80...90)
+        } else {
+            simPulse = Int.random(in: 64...76)
+            simSystolic = Int.random(in: 125...140)
+            simDiastolic = Int.random(in: 82...92)
+        }
+
+        if simWeight > 0 {
+            weightField.text = "\(simWeight)"
+        }
+        heartRateField.text = "\(simPulse)"
+        systolicField.text = "\(simSystolic)"
+        diastolicField.text = "\(simDiastolic)"
+        temperatureField.text = "\(simTemperature)"
     }
 
     // MARK: - UITextFieldDelegate

@@ -23,7 +23,7 @@ class VitalsLog {
     // MARK: - Load / Save
 
     func loadWithCompletion(completion: RequestCompletionBlock?) {
-        guard let request = API.buildRequestFor(fileName: "load_vitals.php", params: [:]) else {
+        guard let request = API.buildRequestFor(fileName: "load_vitals.php", params: [:], forceRefresh: true) else {
             completion?(.invalidRequest)
             return
         }

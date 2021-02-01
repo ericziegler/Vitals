@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - Constants
 
-let BaseURL = "https://zigabytesdev.com/vitals"
+let BaseURL = "https://zigamajig.com/vitals"
 let APISuccessStatus = "success"
 
 typealias RequestCompletionBlock = (_ error: APIError?) -> ()
@@ -41,7 +41,7 @@ enum APIError: Error {
 
 class API {
 
-    static func buildRequestFor(fileName: String, params: [String : String]) -> URLRequest? {
+    static func buildRequestFor(fileName: String, params: [String : String], forceRefresh: Bool = false) -> URLRequest? {
         guard var urlComponents = URLComponents(string: "\(BaseURL)/\(fileName)") else {
             return nil
         }
@@ -49,6 +49,10 @@ class API {
         var queryItems = [URLQueryItem]()
         for (curKey, curValue) in params {
             queryItems.append(URLQueryItem(name: curKey, value: curValue))
+        }
+        if forceRefresh == true {
+            let timestamp = Date().timeIntervalSince1970
+            queryItems.append(URLQueryItem(name: "timestamp", value: String(timestamp)))
         }
         urlComponents.queryItems = queryItems
 
