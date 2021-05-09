@@ -211,6 +211,25 @@ class LightButton: ApplicationStyleButton {
     }
 }
 
+class ActionButton: MediumButton {
+
+    @IBInspectable var normalColor: UIColor = UIColor.lightGray
+    @IBInspectable var highlightedColor: UIColor = UIColor.darkGray
+
+    override var isEnabled: Bool {
+        didSet {
+            self.alpha = isEnabled ? 1 : 0.5
+        }
+    }
+
+    override var isHighlighted: Bool {
+        didSet {
+            self.backgroundColor = isHighlighted ? highlightedColor : normalColor
+        }
+    }
+
+}
+
 // MARK: - UIFont
 
 extension UIFont {
@@ -283,21 +302,37 @@ extension UIColor {
         }
     }
 
-    var lighterColor: UIColor {
-        return lighterColor(removeSaturation: 0.5, resultAlpha: -1)
+    private func makeColor(componentDelta: CGFloat) -> UIColor {
+        var red: CGFloat = 0
+        var blue: CGFloat = 0
+        var green: CGFloat = 0
+        var alpha: CGFloat = 0
+
+        getRed(
+            &red,
+            green: &green,
+            blue: &blue,
+            alpha: &alpha
+        )
+
+        return UIColor(
+            red: add(componentDelta, toComponent: red),
+            green: add(componentDelta, toComponent: green),
+            blue: add(componentDelta, toComponent: blue),
+            alpha: alpha
+        )
     }
 
-    func lighterColor(removeSaturation val: CGFloat, resultAlpha alpha: CGFloat) -> UIColor {
-        var h: CGFloat = 0, s: CGFloat = 0
-        var b: CGFloat = 0, a: CGFloat = 0
+    private func add(_ value: CGFloat, toComponent: CGFloat) -> CGFloat {
+        return max(0, min(1, toComponent + value))
+    }
 
-        guard getHue(&h, saturation: &s, brightness: &b, alpha: &a)
-            else {return self}
+    func lighter(componentDelta: CGFloat = 0.1) -> UIColor {
+        return makeColor(componentDelta: componentDelta)
+    }
 
-        return UIColor(hue: h,
-                       saturation: max(s - val, 0.0),
-                       brightness: b,
-                       alpha: alpha == -1 ? a : alpha)
+    func darker(componentDelta: CGFloat = 0.1) -> UIColor {
+        return makeColor(componentDelta: -1*componentDelta)
     }
 
     class var main: UIColor {

@@ -29,7 +29,7 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
     @IBOutlet var systolicField: UITextField!
     @IBOutlet var diastolicField: UITextField!
     @IBOutlet var heartRateField: UITextField!
-    @IBOutlet var saveButton: UIButton!
+    @IBOutlet var saveButton: ActionButton!
 
     var initialVitals: Vitals?
     var date: Date!
@@ -72,8 +72,8 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
     }
 
     private func setupNavBar() {
-//        let simButton = UIBarButtonItem(title: "_", style: .plain, target: self, action: #selector(simTapped(_:)))
-//        self.navigationItem.leftBarButtonItem = simButton
+        let simButton = UIBarButtonItem(title: "_", style: .plain, target: self, action: #selector(simTapped(_:)))
+        self.navigationItem.leftBarButtonItem = simButton
 
         if let closeImage = UIImage(named: "Close") {
             let closeButton = UIButton(type: .custom)
