@@ -11,6 +11,7 @@ import Foundation
 // MARK: - Constants
 
 let BaseURL = "https://zigamajig.com/vitals"
+fileprivate let APIKey = "0958b35c-35d8-470c-a528-67948351f040"
 let APISuccessStatus = "success"
 
 typealias RequestCompletionBlock = (_ error: APIError?) -> ()
@@ -50,8 +51,9 @@ class API {
         for (curKey, curValue) in params {
             queryItems.append(URLQueryItem(name: curKey, value: curValue))
         }
+        queryItems.append(URLQueryItem(name: "key", value: APIKey))
+        let timestamp = Date().timeIntervalSince1970
         if forceRefresh == true {
-            let timestamp = Date().timeIntervalSince1970
             queryItems.append(URLQueryItem(name: "timestamp", value: String(timestamp)))
         }
         urlComponents.queryItems = queryItems

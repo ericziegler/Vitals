@@ -8,8 +8,6 @@
 
 import Foundation
 
-// MARK: - Constants
-
 class VitalsLog {
 
     // MARK: - Properties
@@ -124,6 +122,29 @@ class VitalsLog {
                 let status = json.dictionaryValue["status"]!.stringValue
                 if status == APISuccessStatus {
                     completion?(nil)
+                } else {
+                    completion?(APIError.custom(message: status))
+                }
+            } else {
+                completion?(.unknown)
+            }
+        }
+        task.resume()
+    }
+
+    func remove(vitals: Vitals?, completion: RequestCompletionBlock?) {
+        guard let vitals = vitals, let request = API.buildRequestFor(fileName: "remove_vitals.php", params: ["id" : vitals.identifier]) else {
+            return
+        }
+        let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+            let response = API.buildJSONResponse(data: data, error: error)
+            if let error = response.1 {
+                completion?(APIError.custom(message: error.localizedDescription))
+            }
+            else if let json = response.0 {
+                let status = json.dictionaryValue["status"]!.stringValue
+                if status == APISuccessStatus {
+                    self.loadWithCompletion(completion: completion)
                 } else {
                     completion?(APIError.custom(message: status))
                 }
