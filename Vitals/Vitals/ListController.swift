@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+import AudioToolbox
 
 class ListController: BaseViewController, UITableViewDataSource, UITableViewDelegate, VitalsControllerDelegate {
 
@@ -127,10 +129,34 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
         showVitalsControllerFor(vitals: vitals)
     }
 
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let vitals = VitalsLog.shared.vitalsAt(index: indexPath.row)
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, completionHandler) in
+            VitalsLog.shared.remove(vitals: vitals) { [unowned self] error in
+                DispatchQueue.main.async {
+                    if let _ = error {
+                        let alert = UIAlertController(title: "Uh oh!", message: "We were unable to delete these vitals.", preferredStyle: .alert)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    } else {
+                        AudioServicesPlaySystemSound(1519)
+                        self.vitalsTable.reloadData()
+                    }
+                }
+            }
+            completionHandler(true)
+        }
+        deleteAction.backgroundColor = UIColor.systemRed
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
+    }
+
     // MARK: - VitalsControllerDelegate
 
     func vitalsAdded(success: Bool, controller: VitalsController) {
         DispatchQueue.main.async {
+            AudioServicesPlaySystemSound(1519)
             self.dismiss(animated: true, completion: nil)
             self.showStatusToast(success: success, isUpdate: false)
             self.vitalsTable.reloadData()
@@ -139,6 +165,7 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     func vitalsUpdated(success: Bool, controller: VitalsController) {
         DispatchQueue.main.async {
+            AudioServicesPlaySystemSound(1519)
             self.dismiss(animated: true, completion: nil)
             self.showStatusToast(success: success, isUpdate: true)
             self.vitalsTable.reloadData()
