@@ -54,6 +54,7 @@ class API {
             let timestamp = Date().timeIntervalSince1970
             queryItems.append(URLQueryItem(name: "timestamp", value: String(timestamp)))
         }
+        queryItems.append(URLQueryItem(name: "key", value: "0958b35c-35d8-470c-a528-67948351f040"))
         urlComponents.queryItems = queryItems
 
         if let url = urlComponents.url {

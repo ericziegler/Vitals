@@ -93,9 +93,14 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
     }
 
     private func showStatusToast(success: Bool, isUpdate: Bool) {
-        let bgColor = (success == true) ? UIColor(hex: 0x63cf8f) : UIColor(hex: 0xe75c57)
+        var bgColor = UIColor(hex: 0xe75c57)
+        var statusText = "⚠ Vitals Not Saved"
+        if success == true {
+            bgColor = UIColor(hex: 0x63cf8f)
+            statusText = "✓ Vitals Saved!"
+            playHaptic()
+        }
         let textColor = UIColor.white
-        let statusText = (success == true) ? "✓ Vitals Saved!" : "⚠ Vitals Not Saved"
         let toast = StatusToastView.createToastFor(parentViewController: self, status: statusText, backgroundColor: bgColor, foregroundColor: textColor)
         toast.showToast()
     }
