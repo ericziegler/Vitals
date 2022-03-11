@@ -7,8 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
 import AudioToolbox
-import AVFAudio
 
 func playHaptic() {
     AudioServicesPlaySystemSound(1519)

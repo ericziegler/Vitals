@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
-import AudioToolbox
 
 class ListController: BaseViewController, UITableViewDataSource, UITableViewDelegate, VitalsControllerDelegate {
 
@@ -139,7 +137,7 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
                         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
                     } else {
-                        AudioServicesPlaySystemSound(1519)
+                        playHaptic()
                         self.vitalsTable.reloadData()
                     }
                 }
@@ -156,7 +154,6 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     func vitalsAdded(success: Bool, controller: VitalsController) {
         DispatchQueue.main.async {
-            AudioServicesPlaySystemSound(1519)
             self.dismiss(animated: true, completion: nil)
             self.showStatusToast(success: success, isUpdate: false)
             self.vitalsTable.reloadData()
@@ -165,7 +162,6 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
 
     func vitalsUpdated(success: Bool, controller: VitalsController) {
         DispatchQueue.main.async {
-            AudioServicesPlaySystemSound(1519)
             self.dismiss(animated: true, completion: nil)
             self.showStatusToast(success: success, isUpdate: true)
             self.vitalsTable.reloadData()
