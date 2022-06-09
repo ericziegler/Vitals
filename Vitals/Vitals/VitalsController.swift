@@ -262,7 +262,7 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
         var simPulse = 0
         var simWeight = 0
         if timeOfDay == .am {
-            simWeight = Int.random(in: 234...238)
+            simWeight = Int.random(in: 238...242)
             simPulse = Int.random(in: 60...72)
             simSystolic = Int.random(in: 120...135)
             simDiastolic = Int.random(in: 80...90)
