@@ -126,7 +126,7 @@ class ListController: BaseViewController, UITableViewDataSource, UITableViewDele
         let vitals = VitalsLog.shared.vitalsAt(index: indexPath.row)
         showVitalsControllerFor(vitals: vitals)
     }
-
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let vitals = VitalsLog.shared.vitalsAt(index: indexPath.row)
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, completionHandler) in
