@@ -328,7 +328,7 @@
                                                         <rect key="frame" x="165" y="0.0" width="237" height="55"/>
                                                         <color key="textColor" red="0.21176470589999999" green="0.23921568630000001" blue="0.27058823529999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Light" family="Roboto" pointSize="20"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="next"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="f1h-Se-mUG" id="zpK-hX-OgG"/>
                                                         </connections>

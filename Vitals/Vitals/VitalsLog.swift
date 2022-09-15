@@ -185,7 +185,7 @@ class VitalsLog {
                     vitals.timeOfDay = .pm
                 }
                 if vitalsComponents[2] != "0" {
-                    vitals.weight = Int(vitalsComponents[2])
+                    vitals.weight = Double(vitalsComponents[2])
                 }
                 if vitalsComponents[3] != "0" {
                     vitals.systolic = Int(vitalsComponents[3])

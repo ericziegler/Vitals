@@ -200,7 +200,7 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
                 }
             }
         }
-        if let weightText = weightField.text, let weight = Int(weightText) {
+        if let weightText = weightField.text, let weight = Double(weightText) {
             vitals.weight = weight
         }
         if let temperatureText = temperatureField.text, let temperature = Double(temperatureText) {
@@ -260,9 +260,10 @@ class VitalsController: BaseViewController, DatePickerControllerDelegate {
         let rawTemp = Int.random(in: 959...980)
         let simTemperature: Double = Double(rawTemp) / 10.0
         var simPulse = 0
-        var simWeight = 0
+        var simWeight: Double = 0
         if timeOfDay == .am {
-            simWeight = Int.random(in: 242...248)
+            let rawWeight = Int.random(in: 2420...2480)
+            simWeight = Double(rawWeight) / 10.0
             simPulse = Int.random(in: 60...72)
             simSystolic = Int.random(in: 120...135)
             simDiastolic = Int.random(in: 80...90)

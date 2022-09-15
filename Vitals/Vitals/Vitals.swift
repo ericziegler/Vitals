@@ -31,7 +31,7 @@ class Vitals {
     var timeOfDay: TimeOfDay!
     var date: Date!
     var temperature: Double?
-    var weight: Int?
+    var weight: Double?
     var systolic: Int?
     var diastolic: Int?
     var pulse: Int?
@@ -58,8 +58,8 @@ class Vitals {
         identifier = props["id"]!.stringValue
         date = Date(timeIntervalSince1970: props["timestamp"]!.doubleValue)
         timeOfDay = TimeOfDay(rawValue: props["time_of_day"]!.intValue)
-        if props["weight"]!.intValue != 0 {
-            weight = props["weight"]!.intValue
+        if props["weight"]!.doubleValue != 0 {
+            weight = props["weight"]!.doubleValue
         }
         if props["systolic"]!.intValue != 0 {
             systolic = props["systolic"]!.intValue
